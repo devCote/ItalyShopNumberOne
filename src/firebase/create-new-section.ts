@@ -14,7 +14,7 @@ export const createNewSection = async (data: sectionObject) => {
 
   // TODO: check if collection exists and imageUrl
 
-  const { title, routeName, linkUrl, file } = data
+  const { title, routeName, file } = data
 
   const storage = getStorage();
 
@@ -27,7 +27,7 @@ export const createNewSection = async (data: sectionObject) => {
 
   // create new section and it's collection
   const newCollectionObj = { id: routeName, items: [], routeName, title }
-  const newSectionObj = { id: routeName, collectionId: routeName, childRef: storageRef.fullPath, imageUrl, linkUrl: `shop/${routeName}`, title }
+  const newSectionObj = { id: routeName, collectionId: routeName, childRef: storageRef.fullPath, imageUrl: '', linkUrl: `shop/${routeName}`, title }
 
   // Add a new documents in collection
   await setDoc(doc(db, 'collections', routeName), newCollectionObj);
