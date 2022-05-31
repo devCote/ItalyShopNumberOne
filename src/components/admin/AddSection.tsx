@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import './section.scss';
 import { useSelector } from 'react-redux';
 import { selectAdminMode } from '../../redux/admin/admin.selector';
@@ -8,12 +8,11 @@ import AdminInput from './AdminInput';
 import { createNewSection } from '../../firebase/create-new-section';
 
 const AddSection = () => {
-  const [imageUrl, setImageUrl]: any = useState(null);
-  const [file, setFile] = useState(null);
-  const [title, setTitle] = useState('TEST');
-  const [routeName, setRouteName] = useState('');
-  const [progress, setProgress] = useState(null);
-  const [status, setStatus] = useState(null);
+  const [imageUrl, setImageUrl] = useState('');
+  const [file, setFile] = useState();
+  const [title, setTitle] = useState('');
+  const [engTitle, setEngTitle] = useState('');
+  const [progress, setProgress] = useState();
 
   const admin = useSelector(selectAdminMode);
   const history = useHistory();
@@ -30,13 +29,20 @@ const AddSection = () => {
     reader.readAsDataURL(e.target.files[0]);
   };
 
+  useEffect(() => {
+    if (progress === 'Загрузка завершена успешно')
+      setInterval(() => {
+        history.push('/')
+        window.location.reload()
+      }, 1000)
+  }, [progress, history])
+
   const onSubmit = () => {
     createNewSection({
       title,
-      routeName,
       file,
-      setStatus,
-      setProgress
+      engTitle,
+      setProgress,
     });
   };
 
@@ -48,68 +54,61 @@ const AddSection = () => {
 
   return (
     <React.Fragment>
-      {admin ? (
-        <React.Fragment>
-          <div className='admin_preview_container'>
-            <div className='showcard_admin_row'>
-              <div onClick={uploadFile} className='collection-item'>
-                <div className='image'>
-                  <img src={imageUrl} alt='' />
-                </div>
-                <div className='content-text'>
-                  <div className='header-text'>{title}</div>
-                </div>
-              </div>
-              <input
-                className='upload_btn'
-                type='file'
-                name='sectionImg'
-                onChange={uploadHandler}
-                ref={uploadRef}
-              />
+      <div className='admin_preview_container'>
+        <div className='showcard_admin_row'>
+          <div onClick={uploadFile} className='collection-item'>
+            <div className='image'>
+              <img src={imageUrl} alt='' />
             </div>
-            <div className='admin_input_container'>
-              <AdminInput
-                inputLabel={'Название раздела'}
-                inputValue={title}
-                setInput={setTitle}
-              />
-              <AdminInput
-                inputLabel={'Путь англ'}
-                inputValue={routeName}
-                setInput={setRouteName}
-              />
+            <div className='content-text'>
+              <div className='header-text'>{title}</div>
             </div>
           </div>
-          <div className='admin_btn_container'>
-            <CustomButton
-              onClick={onSubmit}
-              className='control_btn'
-              type='button'
-              apply
-            >
-              Отправить
-            </CustomButton>
-            <CustomButton
-              onClick={() => history.push('/')}
-              className='control_btn'
-              type='button'
-            >
-              Вернуться
-            </CustomButton>
+          <input
+            className='upload_btn'
+            type='file'
+            name='sectionImg'
+            onChange={uploadHandler}
+            ref={uploadRef}
+          />
+        </div>
+        <div className='admin_input_container'>
+          <AdminInput
+            inputLabel={'Название раздела'}
+            inputValue={title}
+            setInput={setTitle}
+          />
+          <AdminInput
+            inputLabel={'Название англ'}
+            inputValue={engTitle}
+            setInput={setEngTitle}
+          />
+        </div>
+      </div>
+      <div className='admin_btn_container'>
+        <CustomButton
+          onClick={onSubmit}
+          className='control_btn'
+          type='button'
+          apply
+        >
+          Отправить
+        </CustomButton>
+        <CustomButton
+          onClick={() => history.push('/')}
+          className='control_btn'
+          type='button'
+        >
+          Вернуться
+        </CustomButton>
+      </div>
+      <div className='admin_status_container'>
+        {progress && (
+          <div className='upload_status'>
+            <p className='status'>{progress}</p>
           </div>
-          <div className='admin_status_container'>
-            {status && progress ? (
-              <div className='upload_status'>
-                <p className='status'>{status}</p>
-                {progress !== '100' ? (
-                  <p className='percentage'>{progress}%</p>
-                ) : null}
-              </div>
-            ) : null}
-          </div>
-        </React.Fragment>
-      ) : null}
+        )}
+      </div>
     </React.Fragment>
   );
 };

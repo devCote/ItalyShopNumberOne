@@ -1,35 +1,67 @@
 import { doc, setDoc } from "firebase/firestore";
 import { firestore as db } from "./firebase.utils"
 import { getStorage, ref } from "firebase/storage";
+import { imageUpload } from './image-upload'
+import { getDownloadURL } from 'firebase/storage'
 
 type sectionObject = {
   title: string,
-  routeName: string,
+  engTitle: string,
   file: any,
-  setStatus: Function,
   setProgress: Function,
 }
 
 export const createNewSection = async (data: sectionObject) => {
 
-  // TODO: check if collection exists and imageUrl
+  const { title, engTitle, file, setProgress } = data
 
-  const { title, routeName, file } = data
+  if (!file) return
 
   const storage = getStorage();
 
-  if (!file) return
   const storageRef = ref(storage, 'images/sections/' + file.name);
 
-  // While the file names are the same, the references point to different files
-  // mountainsRef.name === mountainImagesRef.name;           // true
-  // mountainsRef.fullPath === mountainImagesRef.fullPath;   // false
+  const uploadTask = imageUpload(file)
 
-  // create new section and it's collection
-  const newCollectionObj = { id: routeName, items: [], routeName, title }
-  const newSectionObj = { id: routeName, collectionId: routeName, childRef: storageRef.fullPath, imageUrl: '', linkUrl: `shop/${routeName}`, title }
+  uploadTask.on('state_changed',
+    (snapshot) => {
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      setProgress('Загрузка ' + progress + '% выполнена');
+      switch (snapshot.state) {
+        case 'paused':
+          setProgress('Пауза');
+          break;
+        case 'running':
+          setProgress('Идет загрузка');
+          break;
+      }
+    },
+    (error) => {
+      switch (error.code) {
+        case 'storage/unauthorized':
+          alert('storage/unauthorized')
+          break;
+        case 'storage/canceled':
+          alert('storage/canceled')
+          break;
+        case 'storage/unknown':
+          alert('storage/unknown')
+          break;
+      }
+    },
+    () => {
+      // Upload completed successfully, now we can get the download URL
+      getDownloadURL(uploadTask.snapshot.ref).then(async (imageUrl) => {
 
-  // Add a new documents in collection
-  await setDoc(doc(db, 'collections', routeName), newCollectionObj);
-  await setDoc(doc(db, 'sections', routeName), newSectionObj)
+        const newCollectionObj = { title, engTitle, items: [] }
+        const newSectionObj = { title, engTitle, imageUrl, storageRef: storageRef.fullPath }
+
+        await setDoc(doc(db, 'collections', engTitle), newCollectionObj);
+        await setDoc(doc(db, 'sections', engTitle), newSectionObj)
+        setProgress('Загрузка завершена успешно');
+
+      });
+    }
+  );
+
 }
