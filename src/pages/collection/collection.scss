@@ -1,0 +1,107 @@
+.empty {
+  position: absolute;
+  top: 50vh;
+  left: 46vw;
+  font-size: 2rem;
+}
+
+.collection-page {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  .title {
+    font-size: 38px;
+    margin: 0 auto 30px;
+    margin-top: 10px;
+    color: black;
+  }
+
+  .items {
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    @media only screen and (max-width: 1180px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media only screen and (max-width: 880px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media only screen and (max-width: 580px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    .collection-item {
+      display: flex;
+      width: 270px;
+      flex-direction: column;
+      height: 366px;
+      align-items: center;
+      position: relative;
+      margin-bottom: 10px;
+      background: rgba($color: #000, $alpha: 0.6);
+    }
+
+    .collection_item_admin {
+      position: relative;
+      width: 270px;
+      height: 366px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:hover .sign_to_action {
+        opacity: 0.5;
+        color: black;
+      }
+
+      &:hover .text_to_action {
+        opacity: 0.5;
+        color: black;
+      }
+
+      .sign_to_action {
+        color: white;
+        margin-top: 30%;
+        font-weight: 700;
+        font-size: 6.5rem;
+        text-shadow: 2px 2px grey;
+        text-align: center;
+      }
+
+      .text_to_action {
+        color: white;
+        text-shadow: 2px 2px grey;
+        font-weight: 700;
+        font-size: 1.5rem;
+        text-align: center;
+      }
+
+      &:hover .modify_btn_container .modify_btn {
+        display: unset;
+      }
+
+      .modify_btn_container {
+        width: 40%;
+        opacity: 0.7;
+        position: absolute;
+        top: 275px;
+        left: 10px;
+        display: flex;
+
+        .modify_btn {
+          min-width: 114px;
+          padding: 0 25px 0 25px;
+          position: relative;
+          top: 0;
+        }
+      }
+    }
+  }
+}

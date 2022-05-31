@@ -1,0 +1,49 @@
+.modal_dimmer {
+  background: rgba($color: #000000, $alpha: 0.7);
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+
+  .modal_window_container {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+
+    .modal_window {
+      background: #152123;
+      height: 340px;
+      width: 400px;
+      display: flex;
+      flex-direction: column;
+      color: white;
+
+      .modal_header {
+        text-align: center;
+        margin-top: 40px;
+        font-size: 2rem;
+        font-variant: small-caps;
+      }
+
+      .modal_content {
+        margin: 10%;
+        margin-bottom: 0;
+        font-variant: small-caps;
+        text-align: center;
+      }
+
+      .modal_actions {
+        display: flex;
+        justify-content: flex-end;
+        align-content: flex-end;
+        margin: auto;
+
+        .modal_delete_button {
+          background: red;
+        }
+      }
+    }
+  }
+}

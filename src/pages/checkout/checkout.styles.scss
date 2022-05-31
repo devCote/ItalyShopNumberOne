@@ -1,0 +1,113 @@
+.checkout-page {
+  width: 75%;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto 0;
+  color: white;
+  background-color: rgba($color: #171921, $alpha: 0.8);
+  padding: 30px;
+  @media (max-width: 780px) {
+    width: 100%;
+    margin: 0;
+  }
+
+  .checkout-header {
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    //justify-content: flex-end;
+    border-bottom: 1px solid darkgrey;
+    //margin: 0 10px;
+
+    .header-block {
+      text-transform: capitalize;
+      width: 75%;
+
+      &:first-child {
+        padding-left: 0px;
+        width: 26%;
+      }
+      &:last-child {
+        text-align: end;
+        padding-left: 10px;
+        width: 17%;
+      }
+      &:nth-child(2) {
+        width: 18%;
+      }
+      &:nth-child(3) {
+        width: 12%;
+      }
+      &:nth-child(4) {
+        text-align: end;
+        width: 16%;
+        padding-right: 26px;
+      }
+      &:nth-child(5) {
+        text-align: end;
+        padding-right: 6px;
+        width: 16%;
+      }
+      &:nth-child(6) {
+        text-align: end;
+        padding-right: 8px;
+        width: 16%;
+      }
+    }
+  }
+
+  .total {
+    margin-top: 30px;
+    margin-left: auto;
+    font-size: 36px;
+  }
+
+  .test-warning {
+    color: red;
+    margin: 10px 0;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .payment {
+    display: flex;
+    margin: 30px;
+    width: 100%;
+
+    button {
+      width: 50%;
+    }
+  }
+
+  .payment_form {
+    display: flex;
+    flex-direction: column;
+
+    .pay_row {
+      margin: 10px;
+      display: flex;
+      justify-content: space-between;
+
+      .pay_label {
+        margin-right: 10px;
+        margin-top: 5px;
+      }
+
+      .pay_input {
+        outline: none;
+        border: none;
+        border-bottom: solid 1px black;
+        height: 30px;
+        font-size: 16px;
+        justify-self: end;
+        background-color: #fcf6f5ff;
+        text-indent: 10px;
+      }
+    }
+    .pay_btn {
+      margin-top: 30px;
+    }
+  }
+}

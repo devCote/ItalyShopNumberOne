@@ -1,0 +1,67 @@
+.custom-button {
+  min-width: 150px;
+  width: auto;
+  height: 50px;
+  letter-spacing: 0.5px;
+  line-height: 50px;
+  padding: 0 35px 0 35px;
+  font-size: 15px;
+  background-color: #131921;
+  color: white;
+  text-transform: uppercase;
+  font-family: 'Open Sans Condensed';
+  font-weight: bolder;
+  border: 1px rgba($color: #fff, $alpha: 0.6) solid;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  outline: none;
+
+  &:hover {
+    background-color: darken(#743ad5, 10%);
+  }
+
+  &.google-sign-in {
+    background-color: #4285f4;
+    color: white;
+
+    &:hover {
+      background-color: #357ae8;
+      border: none;
+    }
+  }
+
+  &.apply {
+    background-color: darkgreen;
+    color: white;
+
+    &:hover {
+      background-color: lightgreen;
+      color: #131921;
+    }
+  }
+
+  &.inverted {
+    background-color: white;
+    color: #131921;
+    border: 1px solid #131921;
+
+    &:hover {
+      background-color: darken(#743ad5, 10%);
+      color: white;
+      border: none;
+    }
+  }
+
+  &.pay_delivery_btn.inverted {
+    &:hover {
+      background-color: white;
+      color: #131921;
+      border: 1px solid #131921;
+    }
+  }
+}
+
+.l_btn .custom-button {
+  width: 50%;
+}

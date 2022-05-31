@@ -1,0 +1,24 @@
+.modify_btn_container .modify_btn:hover {
+  display: unset;
+}
+
+.modify_btn_container {
+  width: 40%;
+  opacity: 0.7;
+  position: absolute;
+  top: 255px;
+  left: 20px;
+  display: flex;
+
+  .modify_btn {
+    min-width: 114px;
+    padding: 0 25px 0 25px;
+    position: relative;
+    top: 0;
+  }
+}
+
+.modify_btn_container_col {
+  @extend .modify_btn_container;
+  left: 10px;
+}

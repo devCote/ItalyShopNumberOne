@@ -1,0 +1,105 @@
+.details_item_container {
+  margin: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .details_header {
+    display: flex;
+    margin-bottom: 40px;
+    justify-content: center;
+    color: white;
+    align-items: flex-end;
+
+    .details_product_tittle {
+      margin-right: 10px;
+      color: #743ad5;
+    }
+
+    .details_product_price {
+      font-weight: 300;
+    }
+    .details_product_old_price {
+      font-weight: 200;
+      text-decoration: line-through purple;
+      font-size: 18px;
+      padding-bottom: 4px;
+      margin-left: 6px;
+    }
+  }
+
+  .details_product_container {
+    display: flex;
+    justify-content: center;
+
+    .details_img {
+      width: 500px;
+      margin-right: 10px;
+    }
+
+    .details_img_container {
+      width: 60px;
+      margin-right: 10px;
+      display: flex;
+      flex-direction: column;
+      .details_img_preview {
+        width: 60px;
+        height: 80px;
+        border: solid white 1px;
+        margin-bottom: 10px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .details_product_info {
+      .details_table {
+        border-collapse: collapse;
+        tr {
+          th {
+            border: 6px solid #743ad5;
+            border-right: none;
+            border-bottom: none;
+            border-top: none;
+            border-collapse: collapse;
+            text-align: left;
+            padding: 5px 15px;
+            color: white;
+            background-color: rgba($color: #000, $alpha: 0.9);
+          }
+          .th2 {
+            background-color: rgba($color: #222, $alpha: 1);
+          }
+          td {
+            border: 1px solid white;
+            border-left: none;
+            border-bottom: none;
+            border-top: none;
+            border-right: none;
+            border-collapse: collapse;
+            text-align: left;
+            padding: 5px 15px;
+            color: white;
+            background-color: rgba($color: #000, $alpha: 0.9);
+          }
+          .td2 {
+            background-color: rgba($color: #222, $alpha: 1);
+          }
+        }
+      }
+    }
+  }
+
+  .details_btns {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    margin-top: 40px;
+
+    .details_add_btn {
+      width: 300px;
+    }
+  }
+}

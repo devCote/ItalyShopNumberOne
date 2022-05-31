@@ -1,0 +1,23 @@
+.sign-up {
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+  background: rgba($color: #000, $alpha: 0.5);
+  padding: 0 20px;
+
+  .title {
+    margin: 25px 0 5px 0;
+  }
+
+  .sign-up-form {
+    padding-bottom: 30px;
+
+    button {
+      width: 100%;
+    }
+  }
+  @media (max-width: 640px) {
+    width: 70%;
+    margin: 0 15%;
+  }
+}
