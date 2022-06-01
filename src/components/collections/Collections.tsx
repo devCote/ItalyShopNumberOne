@@ -34,7 +34,7 @@ const Collection = () => {
             <div
               className="collection-item"
               onClick={() => {
-                history.push('/admin/addsection/section');
+                history.push('/admin/addsection/');
               }}
             >
               <p className="sign_to_action">+</p>

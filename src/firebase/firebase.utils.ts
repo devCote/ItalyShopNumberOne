@@ -258,15 +258,13 @@ export const addCollectionAndDocuments = async (
 
 export const convertCollectionsSnapshotToMap = (collections: any) => {
   const transformedCollection = collections.docs.map((doc: any) => {
-    const { title, items, childRef, id } = doc.data();
+    const { title, items, engTitle } = doc.data();
 
     return {
-      routeName: encodeURI(title.toLowerCase()),
-      id,
-      docId: doc.id,
+      routeName: encodeURI(engTitle.toLowerCase()),
       title,
       items,
-      childRef,
+      engTitle,
     };
   });
 
@@ -278,15 +276,13 @@ export const convertCollectionsSnapshotToMap = (collections: any) => {
 
 export const convertDirectorySnapshotToMap = (sections: any) => {
   const transformedDirectory = sections.docs.map((doc: any) => {
-    const { title, imageUrl, linkUrl, childRef, collectionId } = doc.data();
+    const { id, title, engTitle, imageUrl } = doc.data();
 
     return {
-      id: doc.id,
+      id,
       title,
       imageUrl,
-      linkUrl,
-      childRef,
-      collectionId,
+      engTitle
     };
   });
 

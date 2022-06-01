@@ -38,26 +38,27 @@ const AddCollection = () => {
   const match: any = useRouteMatch();
 
   const addItem = () => {
-    addItemToCollection(
-      'collections',
-      {
-        id,
-        imageUrl,
-        name,
-        childRef,
-        price,
-        brand,
-        country,
-        landing,
-        style,
-        color,
-        fabricType,
-        fabricSettings,
-        fastener,
-        sizes,
-      },
-      match.params.docId
-    );
+    //addItemToCollection(
+    //'collections',
+    //{
+    //id,
+    //imageUrl,
+    //name,
+    //childRef,
+    //price,
+    //brand,
+    //country,
+    //landing,
+    //style,
+    //color,
+    //fabricType,
+    //fabricSettings,
+    //fastener,
+    //sizes,
+    //},
+    //match.params.docId
+    //);
+    console.log(match.params)
   };
 
   const addItemRef: any = useRef();

@@ -4,22 +4,24 @@ import { getStorage, ref } from "firebase/storage";
 import { imageUpload } from './image-upload'
 import { getDownloadURL } from 'firebase/storage'
 
-type sectionObject = {
+type newProduct = {
   title: string,
   engTitle: string,
   file: any,
+  collectionName: string,
   setProgress: Function,
 }
 
-export const createNewSection = async (data: sectionObject) => {
+export const createNewProduct = async (data: newProduct) => {
 
-  const { title, engTitle, file, setProgress } = data
+  const { title, engTitle, file, setProgress, collectionName } = data
 
   if (!file) return
 
   const storage = getStorage();
 
-  const storageRef = ref(storage, 'images/sections/' + file.name);
+  const storageRef = ref(storage, 'images/collections/' +
+    collectionName + file.name);
 
   const uploadTask = imageUpload(file)
 
@@ -53,18 +55,11 @@ export const createNewSection = async (data: sectionObject) => {
       // Upload completed successfully, now we can get the download URL
       getDownloadURL(uploadTask.snapshot.ref).then(async (imageUrl) => {
 
-        const id = Math.round(Math.random() * 1000000000);
-
         const newCollectionObj = { title, engTitle, items: [] }
-        const newSectionObj = { id, title, engTitle, imageUrl, storageRef: storageRef.fullPath }
+        const newSectionObj = { title, engTitle, imageUrl, storageRef: storageRef.fullPath }
 
-        try {
-          await setDoc(doc(db, 'products', engTitle), newCollectionObj);
-          await setDoc(doc(db, 'sections', engTitle), newSectionObj)
-        } catch (err) {
-          alert(err)
-        }
-
+        await setDoc(doc(db, 'product', engTitle), newCollectionObj);
+        await setDoc(doc(db, 'sections', engTitle), newSectionObj)
         setProgress('Загрузка завершена успешно');
 
       });
