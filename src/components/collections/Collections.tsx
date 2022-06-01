@@ -2,10 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './Collections.scss';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-//import {
-//SpinnerOverlay,
-//SpinnerContainer,
-//} from '../../components/with-spinner/with-spinner.styles';
 import {
   selectDirectorySection,
   selectIsDirectoryLoaded,
@@ -13,6 +9,7 @@ import {
 import { selectAdminMode } from '../../redux/admin/admin.selector';
 import AdminBtns from '../admin/AdminBtns';
 import NewSpinner from '../new-spinner/NewSpinner';
+import CollectionsAdmin from './CollectionsAdmin';
 
 const Collection = () => {
   const isLoaded = useSelector(selectIsDirectoryLoaded);
@@ -30,37 +27,27 @@ const Collection = () => {
     <React.Fragment>
       {currentStatus ? (
         <div className="menu container">
-          {adminMode ? (
-            <div
-              className="collection-item"
-              onClick={() => {
-                history.push('/admin/addsection/');
-              }}
-            >
-              <p className="sign_to_action">+</p>
-              <p className="text_to_action">Добавить раздел</p>
-            </div>
-          ) : null}
+          {adminMode && <CollectionsAdmin history={history} />}
           {directory.map((section: any) => (
             <div key={section.id} className="collection-item">
               <Link
                 className="image"
-                to={section.linkUrl + '/' + section.collectionId}
+                to={'/' + section.engTitle}
               >
                 <img
-                  src={section.imageUrl + '/' + section.collectionId}
+                  src={section.imageUrl}
                   alt="card pic"
                 />
               </Link>
               <Link
                 className="header-text"
-                to={section.linkUrl + '/' + section.collectionId}
+                to={'/' + section.engTitle}
               >
                 <div className="content-text">{section.title}</div>
               </Link>
               <AdminBtns
                 item={section}
-                editLink={`/admin/editsection/${section.id}`}
+                editLink={`/admin/editsection/${section.engTitle}`}
                 fireColl={'sections'}
                 isCollection
               />

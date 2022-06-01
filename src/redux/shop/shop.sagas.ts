@@ -12,7 +12,7 @@ import ShopActionTypes from './shop.types';
 
 export function* fetchCollectionsStartAsync() {
   try {
-    const collectionRef = firestore.collection('collections');
+    const collectionRef = firestore.collection('products');
     const snapshot: ResponseGenerator = yield collectionRef.get();
     const collectionsMap: ResponseGenerator = yield call(
       convertCollectionsSnapshotToMap,

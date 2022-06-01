@@ -1,11 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import CollectionItem from '../../components/collection-item/collection-item';
-
-//import {
-//SpinnerOverlay,
-//SpinnerContainer,
-//} from '../../components/with-spinner/with-spinner.styles';
 import {
   selectCollection,
   selectIsCollectionsLoaded,
@@ -14,6 +9,7 @@ import './collection.scss';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { selectAdminMode } from '../../redux/admin/admin.selector';
 import NewSpinner from '../../components/new-spinner/NewSpinner';
+import CollectionAdmin from './collectionAdmin';
 
 const CollectionPage = () => {
   const isLoaded = useSelector(selectIsCollectionsLoaded);
@@ -26,70 +22,49 @@ const CollectionPage = () => {
   const adminMode = useSelector(selectAdminMode);
   const history = useHistory();
   const match: any = useRouteMatch();
-  const collectionName = match.params.collectionName;
-  const collectionId = match.params.collectionId;
-  const collection: any = useSelector(selectCollection(collectionId));
-
-  const Admin = () => (
-    <React.Fragment>
-      {adminMode ? (
-        <div
-          className="collection_item_admin"
-          onClick={() => {
-            history.push(
-              `/admin/addcollection/${collectionName}/${collectionId}`
-            );
-          }}
-        >
-          <p className="sign_to_action">+</p>
-          <p className="text_to_action">Добавить позицию</p>
-        </div>
-      ) : null}
-    </React.Fragment>
-  );
+  const sectionName = match.params.sectionName;
+  const collection: any = useSelector(selectCollection(sectionName));
+  console.log({ collection })
 
   const Title = () => (
-    <React.Fragment>
+    <>
       {currentStatus && collection[0] ? (
-        <h2 className="title">{collectionName}</h2>
+        <h2 className="title">{collection[0].title}</h2>
       ) : null}
-    </React.Fragment>
+    </>
   );
 
   const Item = () => (
-    <React.Fragment>
+    <>
       {currentStatus && collection[0] ? (
-        <React.Fragment>
+        <>
           {collection[0].items.map((item: any) => (
             <CollectionItem
               key={item.id}
-              collectionId={collectionId}
-              collectionName={collectionName}
+              collectionName={sectionName}
               item={item}
             />
           ))}
-        </React.Fragment>
+        </>
       ) : (
         <div className="empty_cont">
           <p className="empty">Пусто</p>
         </div>
       )}
-    </React.Fragment>
+    </>
   );
-
-  const Spinner = () => <NewSpinner />;
 
   return (
     <div className="collection-page">
       <Title />
       <div className="items">
         {currentStatus ? (
-          <React.Fragment>
-            <Admin />
+          <>
+            {adminMode && <CollectionAdmin history={history} sectionName={sectionName} />}
             <Item />
-          </React.Fragment>
+          </>
         ) : (
-          <Spinner />
+          <NewSpinner />
         )}
       </div>
     </div>

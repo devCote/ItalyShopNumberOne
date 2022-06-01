@@ -40,12 +40,9 @@ export const uploadImageCollection = (
   path: string,
   file: any,
   setStatus: any,
-  setPercentage: any,
-  setUrl: any,
-  setChildRef: any
 ) => {
-  const tempArrUrl: any = [];
-  const tempArrChildRef: any = [];
+  //const tempArrUrl: any = [];
+  //const tempArrChildRef: any = [];
 
   const uploadAsync = async (uri: any) => {
     const storageRef = storage.ref();
@@ -68,10 +65,12 @@ export const uploadImageCollection = (
     });
   };
 
-  const updateImageArray = async (imageArray: any) => {
-    return Promise.all(imageArray.map((item: any) => uploadAsync(item)));
-  };
-
+  return Promise.all(file.map((item: any, indx: number, arr: [any]) => {
+    setStatus(`Идет загрузка ${indx + 1} из ${arr.length} картинок`)
+    return uploadAsync(item)
+  }));
+};
+/*
   updateImageArray(file).then((response) => {
     response.forEach((element: any) => {
       tempArrUrl.push(element.url);
@@ -80,9 +79,9 @@ export const uploadImageCollection = (
     setUrl(tempArrUrl);
     setChildRef(tempArrChildRef);
     setStatus('Все файлы загружены');
-    setPercentage('100');
   });
 };
+*/
 
 export const uploadImage = (
   path: string,
@@ -261,7 +260,6 @@ export const convertCollectionsSnapshotToMap = (collections: any) => {
     const { title, items, engTitle } = doc.data();
 
     return {
-      routeName: encodeURI(engTitle.toLowerCase()),
       title,
       items,
       engTitle,
@@ -269,7 +267,7 @@ export const convertCollectionsSnapshotToMap = (collections: any) => {
   });
 
   return transformedCollection.reduce((accumulator: any, collection: any) => {
-    accumulator[collection.routeName] = collection;
+    accumulator[collection.engTitle] = collection;
     return accumulator;
   }, {});
 };

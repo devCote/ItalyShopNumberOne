@@ -1,69 +1,27 @@
-import { doc, setDoc } from "firebase/firestore";
-import { firestore as db } from "./firebase.utils"
-import { getStorage, ref } from "firebase/storage";
-import { imageUpload } from './image-upload'
-import { getDownloadURL } from 'firebase/storage'
+import { doc, updateDoc, getDoc } from "firebase/firestore";
+import { firestore as db, uploadImageCollection } from "./firebase.utils"
 
-type newProduct = {
-  title: string,
-  engTitle: string,
+export const createNewProduct = async (
+  product: Object,
+  sectionName: string,
   file: any,
-  collectionName: string,
-  setProgress: Function,
-}
-
-export const createNewProduct = async (data: newProduct) => {
-
-  const { title, engTitle, file, setProgress, collectionName } = data
-
+  setStatus: Function) => {
   if (!file) return
 
-  const storage = getStorage();
+  const tempArrUrl: any = [];
+  const tempArrChildRef: any = [];
+  const path = `images/products/${sectionName}/`
 
-  const storageRef = ref(storage, 'images/collections/' +
-    collectionName + file.name);
+  const docRef = doc(db, "products", sectionName);
+  const prevDoc = await getDoc(docRef)
 
-  const uploadTask = imageUpload(file)
+  const uploadImages = await uploadImageCollection(path, file, setStatus)
 
-  uploadTask.on('state_changed',
-    (snapshot) => {
-      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      setProgress('Загрузка ' + progress + '% выполнена');
-      switch (snapshot.state) {
-        case 'paused':
-          setProgress('Пауза');
-          break;
-        case 'running':
-          setProgress('Идет загрузка');
-          break;
-      }
-    },
-    (error) => {
-      switch (error.code) {
-        case 'storage/unauthorized':
-          alert('storage/unauthorized')
-          break;
-        case 'storage/canceled':
-          alert('storage/canceled')
-          break;
-        case 'storage/unknown':
-          alert('storage/unknown')
-          break;
-      }
-    },
-    () => {
-      // Upload completed successfully, now we can get the download URL
-      getDownloadURL(uploadTask.snapshot.ref).then(async (imageUrl) => {
+  uploadImages.forEach((image: any) => {
+    tempArrUrl.push(image.url);
+    tempArrChildRef.push(image.childRef.fullPath);
+  })
 
-        const newCollectionObj = { title, engTitle, items: [] }
-        const newSectionObj = { title, engTitle, imageUrl, storageRef: storageRef.fullPath }
-
-        await setDoc(doc(db, 'product', engTitle), newCollectionObj);
-        await setDoc(doc(db, 'sections', engTitle), newSectionObj)
-        setProgress('Загрузка завершена успешно');
-
-      });
-    }
-  );
-
+  await updateDoc(docRef, { items: [{ ...product, imageUrl: tempArrUrl, imageRef: tempArrChildRef }, ...prevDoc.data()?.items] })
+  setStatus('Загрузка завершена успешно');
 }

@@ -7,11 +7,11 @@ export const selectCollections = createSelector(
   (shop) => shop.collections
 );
 
-export const selectCollection = (collectionId: any) =>
+export const selectCollection = (sectionName: any) =>
   createSelector([selectCollections], (collections) =>
     collections
-      ? Object.values(collections).filter((i: any) => i.id === collectionId)
-      : console.log('no collection selected ' + collectionId)
+      ? Object.values(collections).filter((i: any) => i.engTitle === sectionName)
+      : console.log('no collection selected ' + sectionName)
   );
 
 export const selectIsCollectionFetching = createSelector(

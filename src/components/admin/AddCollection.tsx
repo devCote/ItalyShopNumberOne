@@ -1,25 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './section.scss';
 import { useSelector } from 'react-redux';
 import { selectAdminMode } from '../../redux/admin/admin.selector';
 import CustomButton from '../custom-button/custom-button';
-import {
-  addItemToCollection,
-  uploadImageCollection,
-} from '../../firebase/firebase.utils';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import AdminInput from './AdminInput';
+import { createNewProduct } from '../../firebase/create-new-product';
 
 const AddCollection = () => {
   const [imageUrl, setImageUrl]: any = useState([]);
   const [file, setFile]: any = useState([]);
-  const [percentage, setPercentage] = useState(null);
   const [status, setStatus] = useState(null);
-  const [childRef, setChildRef]: any = useState(null);
   const [count, setCount] = useState(0);
   const [currentId, setCurrentId] = useState(0);
 
-  const [id, setId]: any = useState();
   const [name, setName] = useState('');
   const [price, setPrice] = useState(0);
   const [brand, setBrand] = useState('');
@@ -37,46 +31,13 @@ const AddCollection = () => {
   const history = useHistory();
   const match: any = useRouteMatch();
 
-  const addItem = () => {
-    //addItemToCollection(
-    //'collections',
-    //{
-    //id,
-    //imageUrl,
-    //name,
-    //childRef,
-    //price,
-    //brand,
-    //country,
-    //landing,
-    //style,
-    //color,
-    //fabricType,
-    //fabricSettings,
-    //fastener,
-    //sizes,
-    //},
-    //match.params.docId
-    //);
-    console.log(match.params)
-  };
-
-  const addItemRef: any = useRef();
-  addItemRef.current = addItem;
-  const reload: any = useRef(() => {
+  const reload = () => {
     setTimeout(() => {
       window.location.replace(
-        `/shop/${match.params.section}/${match.params.docId}`
+        `/${match.params.sectionName}`
       );
     }, 1000);
-  });
-
-  useEffect(() => {
-    if (childRef) {
-      addItemRef.current();
-      reload.current();
-    }
-  }, [childRef]);
+  };
 
   const uploadHandler = (e: any) => {
     if (!file[currentId]) {
@@ -109,17 +70,19 @@ const AddCollection = () => {
     uploadRef.current.click();
   };
 
-  const onUploadSubmit = () => {
+  const onUploadSubmit = async () => {
     const id = Math.round(Math.random() * 1000000000);
-    setId(id);
-    uploadImageCollection(
-      `images/${id}/`,
+    const product = {
+      id, name, price, brand, country, landing, style,
+      color, fabricType, fabricSettings, fastener, sizes
+    }
+    await createNewProduct(
+      product,
+      match.params.sectionName,
       file,
-      setStatus,
-      setPercentage,
-      setImageUrl,
-      setChildRef
-    );
+      setStatus
+    )
+    reload()
   };
 
   const handleImgChange = (e: any) => {
@@ -302,7 +265,7 @@ const AddCollection = () => {
             <CustomButton
               onClick={() =>
                 history.push(
-                  `/shop/${match.params.section}/${match.params.docId}`
+                  `/${match.params.sectionName}`
                 )
               }
               className='control_btn'
@@ -312,14 +275,11 @@ const AddCollection = () => {
             </CustomButton>
           </div>
           <div className='admin_status_container'>
-            {status && percentage ? (
+            {status && (
               <div className='upload_status'>
                 <p className='status'>{status}</p>
-                {percentage !== '100' ? (
-                  <p className='percentage'>{percentage}%</p>
-                ) : null}
               </div>
-            ) : null}
+            )}
           </div>
         </React.Fragment>
       ) : null}
