@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import CollectionItem from '../collection-item/collection-item';
 import {
@@ -10,7 +9,7 @@ import { useHistory, useRouteMatch } from 'react-router-dom';
 import { selectAdminMode } from '../../redux/admin/admin.selector';
 
 
-const Collection = ({ status }: { status: boolean }) => {
+const Collection = () => {
   const history = useHistory();
   const match: { params: { sectionName: string } } = useRouteMatch();
   const sectionName = match.params.sectionName;

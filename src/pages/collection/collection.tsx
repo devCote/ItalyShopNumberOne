@@ -17,7 +17,7 @@ const CollectionPage = () => {
   return (
     <div className="items">
       {status ?
-        <Collection status={status} />
+        <Collection />
         :
         <NewSpinner />
       }

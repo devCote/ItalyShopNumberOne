@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { ReactComponent as ShopingIcon } from '../../../assets/bag.svg';
 import { toggleCartHidden } from '../../../redux/cart/cart.actions';
 import { useDispatch, useSelector } from 'react-redux';

@@ -6,7 +6,6 @@ import CustomButton from '../custom-button/custom-button';
 import {
   addItemToCollection,
   deleteImage,
-  uploadImageCollection,
 } from '../../firebase/firebase.utils';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import AdminInput from './AdminInput';
@@ -18,9 +17,9 @@ import {
 const EditCollection = () => {
   const [imageUrl, setImageUrl]: any = useState([]);
   const [file, setFile]: any = useState([]);
-  const [percentage, setPercentage] = useState(null);
-  const [status, setStatus] = useState(null);
-  const [childRef, setChildRef]: any = useState(null);
+  const [percentage,] = useState(null);
+  const [status,] = useState(null);
+  const [childRef,]: any = useState(null);
   const [count, setCount] = useState(0);
   const [currentId, setCurrentId] = useState(0);
 
