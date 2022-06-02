@@ -16,10 +16,8 @@ export const createNewSection = async (title: string, url: string, file: any, se
   try {
     await setDoc(doc(db, 'products', id), newCollectionObj);
     await setDoc(doc(db, 'sections', id), newSectionObj)
-  } catch (err) {
-    alert(err)
+  } catch (err: any) {
+    alert(err.message)
   }
-
   setProgress('Загрузка завершена успешно');
-
 }

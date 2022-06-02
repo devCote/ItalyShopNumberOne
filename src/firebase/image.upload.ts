@@ -4,11 +4,11 @@ const metadata: any = {
   contentType: 'image/jpeg'
 };
 
-export const imageUpload = (id: string, file: any, setProgress: Function) => {
+export const imageUpload = async (id: string, file: any, setStatus: Function, path: string = 'sections') => {
 
   const storage = getStorage();
 
-  const storageRef = ref(storage, `images/sections/${id}/` + file.name);
+  const storageRef = ref(storage, `images/${path}/${id}/` + file.name);
   const upload = uploadBytesResumable(storageRef, file, metadata);
 
   return new Promise(async (res, rej) => {
@@ -16,11 +16,10 @@ export const imageUpload = (id: string, file: any, setProgress: Function) => {
       'state_changed',
       (snapshot) => {
         const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-        setProgress(`Загрузка файла ${progress}%`)
+        setStatus(`Загрузка файла ${progress}%`)
       },
       (err) => {
         rej(err);
-        setProgress(err.message)
       },
       async () => {
         const imageUrl = await getDownloadURL(upload.snapshot.ref);

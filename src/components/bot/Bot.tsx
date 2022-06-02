@@ -1,8 +1,8 @@
 import axios from 'axios';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import CustomButton from '../custom-button/custom-button';
 import './Bot.scss';
-import { ReactComponent as PhoneIcon } from '../../assets/speach.svg';
+import { ReactComponent as ChatIcon } from '../../assets/chat.svg';
 
 const Bot = () => {
   const [display, setDisplay] = useState('none');
@@ -60,7 +60,7 @@ const Bot = () => {
         style={display === 'none' ? { display: 'flex' } : { display: 'none' }}
         className='bot_phone_icon'
       /> */}
-      <PhoneIcon className="bot_phone_icon" />
+      <ChatIcon className="bot_phone_icon" />
       <div className="bot_message_container" style={{ display }}>
         <div className="bot_message_header">
           <h2 className="bot_title">Услуга перезвонить или оставить отзыв</h2>

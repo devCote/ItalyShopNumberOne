@@ -35,6 +35,7 @@ export const deleteImage = (childRef: any, isListAll = false) => {
 };
 
 export const uploadImageCollection = (
+  id: string,
   path: string,
   file: any,
   setStatus: any,
@@ -42,7 +43,7 @@ export const uploadImageCollection = (
 
   const uploadAsync = async (uri: any) => {
     const storageRef = storage.ref();
-    const childRef = storageRef.child(path + uri.name);
+    const childRef = storageRef.child(path + id + uri.name);
 
     return new Promise(async (res, rej) => {
       const upload = childRef.put(uri);
@@ -61,7 +62,7 @@ export const uploadImageCollection = (
     });
   };
 
-  return Promise.all(file.map((item: any, indx: number, arr: [any]) => {
+  return Promise.all(file.map((item: any, indx: number, arr: any) => {
     setStatus(`Идет загрузка ${indx + 1} из ${arr.length} картинок`)
     return uploadAsync(item)
   }));
@@ -250,7 +251,7 @@ export const convertCollectionsSnapshotToMap = (collections: any) => {
   });
 
   return transformedCollection.reduce((accumulator: any, collection: any) => {
-    accumulator[collection.engTitle] = collection;
+    accumulator[collection.url] = collection;
     return accumulator;
   }, {});
 };

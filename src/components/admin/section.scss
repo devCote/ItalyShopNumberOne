@@ -1,3 +1,5 @@
+@use '../../lib/colors';
+
 .admin_preview_container {
   display: flex;
   margin: 50px auto 0;
@@ -156,13 +158,14 @@
 
   .admin_input_container {
     margin: 10px 10px 0 10px;
-    background-color: rgba($color: #000, $alpha: 0.7);
+    //background-color: #152123;
+    background-color: colors.$primary;
     padding: 10px 20px;
     margin-bottom: 30px;
 
     .admin_label {
       font-weight: 600;
-      color: #747474;
+      color: #646464;
     }
 
     .admin_input {
@@ -172,7 +175,7 @@
       border: none;
       font-size: 16px;
       margin-bottom: 5px;
-      background-color: rgba($color: lightgrey, $alpha: 0.7);
+      background-color: #d5d5d5;
 
       &:focus {
         outline: none;

@@ -1,3 +1,5 @@
+@use '../../lib/colors';
+
 .switch {
   margin-top: 3px;
   position: relative;
@@ -37,7 +39,7 @@
 }
 
 input:checked + .slider {
-  background-color: #744cd5;
+  background-color: colors.$third;
 }
 
 input:focus + .slider {

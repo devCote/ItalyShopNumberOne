@@ -22,8 +22,8 @@ const EditSectionOrCollection = () => {
 
   const [file, setFile]: any = useState(null);
   const [title, setTitle] = useState(currentSection[0]?.title)
-  const [imageUrl, setImageUrl] = useState(currentSection[0].imageUrl);
-  const [engTitle, setEngTitle] = useState(currentSection[0]?.engTitle);
+  const [imageUrl, setImageUrl] = useState(currentSection[0]?.imageUrl);
+  const [url, setUrl] = useState(currentSection[0]?.url);
   const [status, setStatus] = useState('');
 
   const uploadRef: any = useRef();
@@ -48,7 +48,7 @@ const EditSectionOrCollection = () => {
 
   const onSubmit = () => {
     const { id, storageRef } = currentSection[0]
-    updateSection(id, title, engTitle, file, storageRef, setStatus)
+    updateSection(id, title, url, file, storageRef, setStatus)
   };
 
   const uploadFile = () => {
@@ -85,8 +85,8 @@ const EditSectionOrCollection = () => {
               />
               <AdminInput
                 inputLabel={'Название англ'}
-                inputValue={engTitle}
-                setInput={setEngTitle}
+                inputValue={url}
+                setInput={setUrl}
               />
             </div>
           </div>

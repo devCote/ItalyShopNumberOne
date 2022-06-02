@@ -1,3 +1,5 @@
+@use '../../lib/colors';
+
 .header {
   height: 60px;
   display: flex;
@@ -13,6 +15,11 @@
     margin: 10px 0px 10px 20px;
     cursor: pointer;
     padding-top: 4px;
+
+    &:hover {
+      color: colors.$third;
+    }
+
     @media (max-width: 640px) {
       width: 98px;
       padding-top: 4px;
@@ -110,10 +117,9 @@
     }
 
     .header_option:hover {
-      //border: solid white 1px;
       cursor: pointer;
       .header_optionLineTwo {
-        color: lighten($color: #743ad5, $amount: 15%);
+        color: colors.$third;
       }
     }
 

@@ -12,17 +12,22 @@ export const updateSection = async (
   setStatus: Function,
 ) => {
 
-  alert(file)
-  alert(storageFilePath)
-
-  if (!file) return await updateDoc(doc(db, 'sections', id), { title, url })
+  if (!file) {
+    try {
+      await updateDoc(doc(db, 'sections', id), { title, url })
+      await updateDoc(doc(db, 'products', id), { title, url })
+    } catch (err: any) {
+      alert(err.message)
+    } finally {
+      return window.location.replace('/')
+    }
+  }
 
   deleteImage(storageFilePath)
-
-  const { imageUrl, storageRef }: any = await imageUpload(file, setStatus)
-
+  const { imageUrl, storageRef }: any = await imageUpload(id, file, setStatus)
   try {
     await updateDoc(doc(db, 'sections', id), { title, url, imageUrl, storageRef: storageRef.fullPath })
+    await updateDoc(doc(db, 'products', id), { title, url, })
   } catch (err) {
     alert(err)
   }

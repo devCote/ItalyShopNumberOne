@@ -11,7 +11,7 @@ import {
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import AdminInput from './AdminInput';
 import {
-  selectCollection,
+  selectCollectionByUrl,
   selectIsCollectionsLoaded,
 } from '../../redux/shop/shop.selectors';
 
@@ -68,7 +68,7 @@ const EditCollection = () => {
   const history = useHistory();
   const match: any = useRouteMatch();
   const collection: any = useSelector(
-    selectCollection(match.params.collectionId)
+    selectCollectionByUrl(match.params.collectionId)
   );
 
   const fetchItem = () => {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import CustomButton from '../custom-button/custom-button';
-import { selectCollection } from '../../redux/shop/shop.selectors';
+import { selectCollectionByUrl } from '../../redux/shop/shop.selectors';
 import { addItem } from '../../redux/cart/cart.actions';
 
 import { useDispatch } from 'react-redux';
@@ -15,12 +15,12 @@ const ItemDetails = () => {
   const dispatch = useDispatch();
   const [currentImg, setCurrentImg] = useState(0);
   const collection: any = useSelector(
-    selectCollection(match.params.collectionId)
+    selectCollectionByUrl(match.params.collectionId)
   );
   const item: any = collection
     ? collection[0].items.filter(
-        (i: any) => Number(i.id) === Number(match.params.itemId)
-      )
+      (i: any) => Number(i.id) === Number(match.params.itemId)
+    )
     : null;
 
   if (!item) return <NewSpinner />;

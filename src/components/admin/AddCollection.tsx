@@ -11,7 +11,7 @@ import { selectCurrentSection } from '../../redux/directory/directory.selectors'
 const AddCollection = () => {
   const [imageUrl, setImageUrl]: any = useState([]);
   const [file, setFile]: any = useState([]);
-  const [status, setStatus] = useState(null);
+  const [status, setStatus]: [string, Function] = useState('');
   const [count, setCount] = useState(0);
   const [currentId, setCurrentId] = useState(0);
 

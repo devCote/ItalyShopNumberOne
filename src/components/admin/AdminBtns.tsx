@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import {
   deleteImage,
   deleteItemFromCollection,
 } from '../../firebase/firebase.utils';
+import { deleteSection } from '../../firebase/section.delete';
 import { selectAdminMode } from '../../redux/admin/admin.selector';
+import { selectDirectoryById } from '../../redux/directory/directory.selectors';
+import { selectCollectionById } from '../../redux/shop/shop.selectors';
 import CustomButton from '../custom-button/custom-button';
 import Modal from '../modal/Modal';
 import './adminBtns.scss';
@@ -22,13 +25,23 @@ const AdminBtns = ({ item, editLink, fireColl, isCollection }: Props) => {
   const history = useHistory();
   const [toggleModal, setToggleModal] = useState(false);
   const match: any = useRouteMatch();
+  const currentCollection: any = useSelector(selectCollectionById(item.id))
+  const currentDirectory: any = useSelector(selectDirectoryById(item.id))
+  const [status, setStatus] = useState()
+
+  useEffect(() => {
+    if (status === 'done')
+      setInterval(() => {
+        window.location.reload();
+      }, 1000);
+  }, [status])
 
   const onSubmit = () => {
     if (isCollection && fireColl) {
-      deleteImage(item.childRef);
-      deleteItemFromCollection(fireColl, item.id);
-      deleteItemFromCollection('collections', item.collectionId);
-      deleteImage(`images/${item.collectionId}`, true);
+      const sectionRef = currentDirectory[0]?.storageRef
+      const productsRef = currentCollection[0]?.storageRef
+
+      deleteSection(item.id, productsRef, sectionRef, setStatus)
     } else {
       deleteImage(`images/${item.id}`, true);
       deleteItemFromCollection(
@@ -37,9 +50,6 @@ const AdminBtns = ({ item, editLink, fireColl, isCollection }: Props) => {
         item.id
       );
     }
-    setInterval(() => {
-      window.location.reload();
-    }, 1000);
   };
 
   const modBtnClass: () => string = () =>
