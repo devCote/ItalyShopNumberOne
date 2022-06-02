@@ -3,7 +3,7 @@ import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 import 'firebase/compat/storage';
 
-const firebaseConfig = {
+const config = {
   apiKey: "AIzaSyA5WLYWDdEL--PsXVsQKWjN_6Zd0FLL98Q",
   authDomain: "italyshopnumberone.firebaseapp.com",
   projectId: "italyshopnumberone",
