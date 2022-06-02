@@ -4,7 +4,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/storage';
 
 const config = {
-  apiKey: 'AIzaSyC7Fxyktik-rtX4nXjklHGXukI-NRGu954',
+  apiKey: process.env.REACT_APP_APIKEY,
   authDomain: 'eshop-number1.firebaseapp.com',
   projectId: 'eshop-number1',
   storageBucket: 'eshop-number1.appspot.com',
@@ -24,13 +24,11 @@ export const deleteImage = (childRef: any, isListAll = false) => {
         console.log('fileDeleted');
       })
       .catch((err: any) => {
-        console.log(err.message);
+        console.error(err.message);
       });
   else
     desertRef.listAll().then((res: any) => {
-      console.log(res);
       res.items.forEach((item: any) => {
-        console.log(item);
         item.delete();
       });
     });
@@ -41,8 +39,6 @@ export const uploadImageCollection = (
   file: any,
   setStatus: any,
 ) => {
-  //const tempArrUrl: any = [];
-  //const tempArrChildRef: any = [];
 
   const uploadAsync = async (uri: any) => {
     const storageRef = storage.ref();
@@ -70,18 +66,6 @@ export const uploadImageCollection = (
     return uploadAsync(item)
   }));
 };
-/*
-  updateImageArray(file).then((response) => {
-    response.forEach((element: any) => {
-      tempArrUrl.push(element.url);
-      tempArrChildRef.push(element.childRef.fullPath);
-    });
-    setUrl(tempArrUrl);
-    setChildRef(tempArrChildRef);
-    setStatus('Все файлы загружены');
-  });
-};
-*/
 
 export const uploadImage = (
   path: string,
@@ -157,7 +141,7 @@ export const createUserProfileDocument = async (
         ...aditionalData,
       });
     } catch (err) {
-      console.log('error creating user');
+      console.error('error creating user');
     }
   }
   return userRef;
@@ -188,7 +172,6 @@ export const addItemToCollection = async (
           return null;
         }
       });
-    console.log(fireArr);
     fireObj.items = [...fireArr];
     fireObj.items.splice(itemIdx, 0, objectToAdd);
     batch.update(docRef, fireObj);
@@ -257,12 +240,12 @@ export const addCollectionAndDocuments = async (
 
 export const convertCollectionsSnapshotToMap = (collections: any) => {
   const transformedCollection = collections.docs.map((doc: any) => {
-    const { title, items, engTitle } = doc.data();
+    const { title, items, url } = doc.data();
 
     return {
       title,
       items,
-      engTitle,
+      url,
     };
   });
 
@@ -274,13 +257,14 @@ export const convertCollectionsSnapshotToMap = (collections: any) => {
 
 export const convertDirectorySnapshotToMap = (sections: any) => {
   const transformedDirectory = sections.docs.map((doc: any) => {
-    const { id, title, engTitle, imageUrl } = doc.data();
+    const { id, title, url, imageUrl, storageRef } = doc.data();
 
     return {
       id,
       title,
       imageUrl,
-      engTitle
+      storageRef,
+      url
     };
   });
 

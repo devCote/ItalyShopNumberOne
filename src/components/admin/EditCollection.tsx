@@ -76,43 +76,7 @@ const EditCollection = () => {
     const item: any = collection[0].items.filter(
       (i: any) => Number(i.id) === Number(match.params.docId)
     );
-    console.log(item);
-    const {
-      name,
-      price,
-      brand,
-      country,
-      landing,
-      style,
-      color,
-      fabricType,
-      fabricSettings,
-      fastener,
-      sizes,
-      imageUrl,
-      newPrice,
-      discount,
-    } = item[0];
-    name ? setName(name) : console.log('no name');
-    price ? setPrice(price) : console.log('no price');
-    brand ? setBrand(brand) : console.log('no brand');
-    country ? setCountry(country) : console.log('no country');
-    landing ? setLanding(landing) : console.log('no landing');
-    style ? setStyle(style) : console.log('no style');
-    color ? setColor(color) : console.log('no color');
-    fabricType ? setFabricType(fabricType) : console.log('no fabricType');
-    fabricSettings
-      ? setFabricSettings(fabricSettings)
-      : console.log('no fabricSettings');
-    fastener ? setFastener(fastener) : console.log('no fastener');
-    sizes ? setSizes(sizes) : console.log('no sizes');
-    imageUrl ? setImageUrl(imageUrl) : console.log('no image url');
-    imageUrl.length > 0
-      ? setCount(imageUrl.length - 1)
-      : console.log('no count');
-    newPrice ? setNewPrice(newPrice) : console.log('no newPrice');
-    discount ? setDiscount(discount) : console.log('no discount');
-    newPrice ? setDiscountToggle(true) : console.log('no togleDiscount');
+    console.info(item);
   };
 
   const fetchItemRef = useRef(fetchItem);
@@ -203,14 +167,6 @@ const EditCollection = () => {
   const onUploadSubmit = () => {
     if (file.length > 0) {
       deleteImage(`images/${match.params.docId}`, true);
-      uploadImageCollection(
-        `images/${match.params.docId}/`,
-        file,
-        setStatus,
-        setPercentage,
-        setImageUrl,
-        setChildRef
-      );
     }
     setStartUpdate(true);
   };

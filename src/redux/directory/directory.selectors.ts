@@ -7,6 +7,12 @@ export const selectDirectorySection = createSelector(
   (directory) => directory.directory
 );
 
+export const selectCurrentSection = (name: string) => createSelector(
+  [selectDirectory],
+  (directory) => directory?.directory?.filter((el: { url: string }) => el?.url === name)
+
+)
+
 export const selectIsDirectoryFetching = createSelector(
   [selectDirectory],
   (directory) => directory.isFetching

@@ -3,7 +3,7 @@ const CollectionAdmin = ({ history, sectionName }: { history: { push: Function }
     className="collection_item_admin"
     onClick={() => {
       history.push(
-        `/${sectionName}/addProduct`
+        `/admin/${sectionName}/addProduct`
       );
     }}
   >

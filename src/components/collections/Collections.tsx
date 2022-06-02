@@ -32,7 +32,7 @@ const Collection = () => {
             <div key={section.id} className="collection-item">
               <Link
                 className="image"
-                to={'/' + section.engTitle}
+                to={'/shop/' + section.url}
               >
                 <img
                   src={section.imageUrl}
@@ -41,13 +41,13 @@ const Collection = () => {
               </Link>
               <Link
                 className="header-text"
-                to={'/' + section.engTitle}
+                to={'/shop/' + section.url}
               >
                 <div className="content-text">{section.title}</div>
               </Link>
               <AdminBtns
                 item={section}
-                editLink={`/admin/editsection/${section.engTitle}`}
+                editLink={`/admin/editsection/${section.url}`}
                 fireColl={'sections'}
                 isCollection
               />

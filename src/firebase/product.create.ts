@@ -3,16 +3,17 @@ import { firestore as db, uploadImageCollection } from "./firebase.utils"
 
 export const createNewProduct = async (
   product: Object,
-  sectionName: string,
+  id: string,
   file: any,
   setStatus: Function) => {
-  if (!file) return
+
+  if (!file) return alert('Не загружено фото')
 
   const tempArrUrl: any = [];
   const tempArrChildRef: any = [];
-  const path = `images/products/${sectionName}/`
+  const path = `images/products/${id}/`
 
-  const docRef = doc(db, "products", sectionName);
+  const docRef = doc(db, "products", id);
   const prevDoc = await getDoc(docRef)
 
   const uploadImages = await uploadImageCollection(path, file, setStatus)
@@ -21,6 +22,7 @@ export const createNewProduct = async (
     tempArrUrl.push(image.url);
     tempArrChildRef.push(image.childRef.fullPath);
   })
+
 
   await updateDoc(docRef, { items: [{ ...product, imageUrl: tempArrUrl, imageRef: tempArrChildRef }, ...prevDoc.data()?.items] })
   setStatus('Загрузка завершена успешно');

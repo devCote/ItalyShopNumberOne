@@ -89,25 +89,6 @@
         cursor: pointer;
       }
 
-      .custom-button {
-        width: 80%;
-        opacity: 0.7;
-        position: absolute;
-        top: 265px;
-        display: none;
-      }
-
-      &:hover {
-        .image {
-          opacity: 0.8;
-        }
-
-        .custom-button {
-          opacity: 0.85;
-          display: flex;
-        }
-      }
-
       .collection-footer {
         width: 100%;
         display: flex;

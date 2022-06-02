@@ -5,14 +5,14 @@ import { selectAdminMode } from '../../redux/admin/admin.selector';
 import CustomButton from '../custom-button/custom-button';
 import { useHistory } from 'react-router-dom';
 import AdminInput from './AdminInput';
-import { createNewSection } from '../../firebase/create-new-section';
+import { createNewSection } from '../../firebase/section.create';
 
 const AddSection = () => {
   const [imageUrl, setImageUrl] = useState('');
   const [file, setFile] = useState();
   const [title, setTitle] = useState('');
-  const [engTitle, setEngTitle] = useState('');
-  const [progress, setProgress] = useState();
+  const [url, setUrl] = useState('');
+  const [status, setStatus] = useState();
 
   const admin = useSelector(selectAdminMode);
   const history = useHistory();
@@ -30,20 +30,20 @@ const AddSection = () => {
   };
 
   useEffect(() => {
-    if (progress === 'Загрузка завершена успешно')
+    if (status === 'Загрузка завершена успешно')
       setInterval(() => {
         history.push('/')
         window.location.reload()
       }, 1000)
-  }, [progress, history])
+  }, [status, history])
 
   const onSubmit = () => {
-    createNewSection({
+    createNewSection(
       title,
+      url,
       file,
-      engTitle,
-      setProgress,
-    });
+      setStatus,
+    );
   };
 
   const uploadFile = () => {
@@ -57,9 +57,7 @@ const AddSection = () => {
       <div className='admin_preview_container'>
         <div className='showcard_admin_row'>
           <div onClick={uploadFile} className='collection-item'>
-            <div className='image'>
-              <img src={imageUrl} alt='' />
-            </div>
+            <img className='image' src={imageUrl} alt='' />
             <div className='content-text'>
               <div className='header-text'>{title}</div>
             </div>
@@ -80,8 +78,8 @@ const AddSection = () => {
           />
           <AdminInput
             inputLabel={'Название англ'}
-            inputValue={engTitle}
-            setInput={setEngTitle}
+            inputValue={url}
+            setInput={setUrl}
           />
         </div>
       </div>
@@ -103,9 +101,9 @@ const AddSection = () => {
         </CustomButton>
       </div>
       <div className='admin_status_container'>
-        {progress && (
+        {status && (
           <div className='upload_status'>
-            <p className='status'>{progress}</p>
+            <p className='status'>{status}</p>
           </div>
         )}
       </div>

@@ -34,11 +34,6 @@ const CheckoutPage = () => {
 
   const handleSubmitDelivery = (e: any) => {
     e.preventDefault();
-    console.log({
-      total,
-      cartItems,
-      credentials: { name, tel, place, department },
-    });
     axios({
       url: 'http://34.136.124.116:3535/delivery',
       method: 'POST',
@@ -53,8 +48,7 @@ const CheckoutPage = () => {
         dispatch(paymentSuccess());
       })
       .catch((err) => {
-        alert('Ошибка при отправке.');
-        console.log('error', err.message);
+        alert('Ошибка при отправке.' + err);
       });
     setName('');
     setTel('');
@@ -63,7 +57,6 @@ const CheckoutPage = () => {
     setInverted(!inverted);
   };
 
-  console.log(cartItems);
   return (
     <div className="checkout-page">
       <div className="checkout-header">

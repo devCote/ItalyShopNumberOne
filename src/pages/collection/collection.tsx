@@ -24,7 +24,6 @@ const CollectionPage = () => {
   const match: any = useRouteMatch();
   const sectionName = match.params.sectionName;
   const collection: any = useSelector(selectCollection(sectionName));
-  console.log({ collection })
 
   const Title = () => (
     <>

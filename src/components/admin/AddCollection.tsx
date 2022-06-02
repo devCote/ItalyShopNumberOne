@@ -1,11 +1,12 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './section.scss';
 import { useSelector } from 'react-redux';
 import { selectAdminMode } from '../../redux/admin/admin.selector';
 import CustomButton from '../custom-button/custom-button';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import AdminInput from './AdminInput';
-import { createNewProduct } from '../../firebase/create-new-product';
+import { createNewProduct } from '../../firebase/product.create';
+import { selectCurrentSection } from '../../redux/directory/directory.selectors';
 
 const AddCollection = () => {
   const [imageUrl, setImageUrl]: any = useState([]);
@@ -30,14 +31,17 @@ const AddCollection = () => {
   const admin = useSelector(selectAdminMode);
   const history = useHistory();
   const match: any = useRouteMatch();
+  const sectionName = match.params.sectionName
+  const currentSection = useSelector(selectCurrentSection(sectionName))
 
-  const reload = () => {
-    setTimeout(() => {
-      window.location.replace(
-        `/${match.params.sectionName}`
-      );
-    }, 1000);
-  };
+  useEffect(() => {
+    if (status === 'Загрузка завершена успешно')
+      setTimeout(() => {
+        window.location.replace(
+          `/shop/${sectionName}`
+        );
+      }, 1000);
+  }, [status, sectionName])
 
   const uploadHandler = (e: any) => {
     if (!file[currentId]) {
@@ -71,18 +75,17 @@ const AddCollection = () => {
   };
 
   const onUploadSubmit = async () => {
-    const id = Math.round(Math.random() * 1000000000);
+    const id = Math.round(Math.random() * 1000000000).toString();
     const product = {
       id, name, price, brand, country, landing, style,
       color, fabricType, fabricSettings, fastener, sizes
     }
-    await createNewProduct(
+    createNewProduct(
       product,
-      match.params.sectionName,
+      currentSection[0].id,
       file,
       setStatus
     )
-    reload()
   };
 
   const handleImgChange = (e: any) => {
@@ -265,7 +268,7 @@ const AddCollection = () => {
             <CustomButton
               onClick={() =>
                 history.push(
-                  `/${match.params.sectionName}`
+                  `/shop/${match.params.sectionName}`
                 )
               }
               className='control_btn'

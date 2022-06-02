@@ -34,18 +34,16 @@
 
     .collection-item {
       display: flex;
-      width: 270px;
       flex-direction: column;
       height: 366px;
       align-items: center;
       position: relative;
       margin-bottom: 10px;
-      background: rgba($color: #000, $alpha: 0.6);
+      background: rgba($color: #122, $alpha: 0.8);
     }
 
     .collection_item_admin {
       position: relative;
-      width: 270px;
       height: 366px;
       margin-bottom: 10px;
       border: 1px solid rgba(0, 0, 0, 0.2);

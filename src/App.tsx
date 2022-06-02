@@ -25,6 +25,7 @@ const App = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
   const cartIsEmpty = useSelector(selectIfCartIsEmpty);
+  console.log(cartIsEmpty)
 
   const fetchRef = useRef(() => {
     dispatch(checkUserSession());
@@ -42,12 +43,12 @@ const App = () => {
         <Route exact path={'/contacts'} component={ContactPage} />
         <Route
           exact
-          path={'/:sectionName'}
+          path={'/shop/:sectionName'}
           component={CollectionPage}
         />
         <Route
           exact
-          path={'/details/:section/:collectionId/:itemId'}
+          path={'/shop/:sectionName/:itemId'}
           component={DetailsPage}
         />
         <Route
@@ -57,17 +58,17 @@ const App = () => {
         />
         <Route
           exact
-          path={'/:sectionName/addProduct'}
+          path={'/admin/:sectionName/addProduct'}
           component={AddCollectionPage}
         />
         <Route
           exact
-          path={'/admin/editsection/:sectionId'}
+          path={'/admin/editsection/:sectionName'}
           component={EditSectionPage}
         />
         <Route
           exact
-          path={'/admin/editcollection/:section/:collectionId/:docId'}
+          path={'/admin/editproduct/:sectionName/:docId'}
           component={EditCollectionPage}
         />
         <Route

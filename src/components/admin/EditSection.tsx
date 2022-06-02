@@ -1,87 +1,32 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './section.scss';
 import { useSelector } from 'react-redux';
 import {
-  selectDirectorySection,
+  selectCurrentSection,
   selectIsDirectoryLoaded,
 } from '../../redux/directory/directory.selectors';
 import { selectAdminMode } from '../../redux/admin/admin.selector';
 import CustomButton from '../custom-button/custom-button';
 import { useHistory, useRouteMatch } from 'react-router-dom';
-import { deleteImage, uploadImage } from '../../firebase/firebase.utils';
-import { updateItemInCollection } from '../../firebase/firebase.utils';
 import AdminInput from './AdminInput';
 import NewSpinner from '../new-spinner/NewSpinner';
+import { updateSection } from '../../firebase/section.update';
 
 const EditSectionOrCollection = () => {
   const isLoaded = useSelector(selectIsDirectoryLoaded);
-  const directory = useSelector(selectDirectorySection);
   const admin = useSelector(selectAdminMode);
   const match: any = useRouteMatch();
   const history = useHistory();
+  const sectionName = match.params.sectionName
+  const currentSection = useSelector(selectCurrentSection(sectionName));
 
-  const [currentStatus, setCurrentStatus] = useState(isLoaded);
   const [file, setFile]: any = useState(null);
-  const [title, setTitle] = useState('TEST');
-  const [imageUrl, setImageUrl] = useState('');
-  const [path, setPath] = useState('');
-  const [percentage, setPercentage] = useState('');
+  const [title, setTitle] = useState(currentSection[0]?.title)
+  const [imageUrl, setImageUrl] = useState(currentSection[0].imageUrl);
+  const [engTitle, setEngTitle] = useState(currentSection[0]?.engTitle);
   const [status, setStatus] = useState('');
-  const [id, setId] = useState('');
-  const [childRef, setChildRef]: any = useState();
 
-  const sectionDataToStateRef: any = useRef();
-  const updateItemRef: any = useRef();
   const uploadRef: any = useRef();
-
-  const sectionDataToState = () => {
-    directory
-      .filter((section: any) => section.id === match.params.sectionId)
-      .forEach((item: any) => {
-        setImageUrl(item.imageUrl);
-        setPath(item.linkUrl);
-        setId(item.id);
-        setTitle(item.title);
-        if (item.childRef && setChildRef) setChildRef(item.childRef);
-      });
-  };
-
-  const updateItem = () => {
-    let link: string = path;
-    if (!path.includes('shop/')) link = `shop/${path}`;
-    if (!file) {
-      updateItemInCollection('sections', id, {
-        title: title,
-        linkUrl: link,
-      });
-    } else {
-      updateItemInCollection('sections', id, {
-        imageUrl,
-        linkUrl: link,
-        title,
-        childRef: childRef.fullPath,
-      });
-    }
-
-    setTimeout(() => {
-      window.location.replace('/');
-    }, 500);
-  };
-  sectionDataToStateRef.current = sectionDataToState;
-  updateItemRef.current = updateItem;
-
-  useEffect(() => {
-    setCurrentStatus(isLoaded);
-  }, [isLoaded]);
-
-  useEffect(() => {
-    if (status === 'Загрузка завершена успешно' || status === 'Сохранено')
-      updateItemRef.current();
-  }, [status]);
-
-  useEffect(() => {
-    if (directory) sectionDataToStateRef.current();
-  }, [directory]);
 
   const uploadHandler = (e: any) => {
     setFile(e.target.files[0]);
@@ -93,20 +38,17 @@ const EditSectionOrCollection = () => {
     reader.readAsDataURL(e.target.files[0]);
   };
 
+  useEffect(() => {
+    if (status === 'Загрузка завершена успешно')
+      setInterval(() => {
+        window.location.replace('/');
+      }, 1000)
+  }, [status])
+
+
   const onSubmit = () => {
-    if (file && childRef) {
-      deleteImage(childRef);
-      uploadImage(
-        'images/sections/',
-        file,
-        setStatus,
-        setPercentage,
-        setImageUrl,
-        setChildRef
-      );
-    } else {
-      setStatus('Сохранено');
-    }
+    const { id, storageRef } = currentSection[0]
+    updateSection(id, title, engTitle, file, storageRef, setStatus)
   };
 
   const uploadFile = () => {
@@ -117,14 +59,12 @@ const EditSectionOrCollection = () => {
 
   return (
     <React.Fragment>
-      {currentStatus && admin ? (
+      {isLoaded && admin ? (
         <React.Fragment>
           <div className='admin_preview_container'>
             <div className='showcard_admin_row'>
               <div onClick={uploadFile} className='collection-item'>
-                <div className='image'>
-                  <img src={imageUrl} alt='' />
-                </div>
+                <img className="image" src={imageUrl} alt='' />
                 <div className='content-text'>
                   <div className='header-text'>{title}</div>
                 </div>
@@ -144,9 +84,9 @@ const EditSectionOrCollection = () => {
                 setInput={setTitle}
               />
               <AdminInput
-                inputLabel={'Путь англ'}
-                inputValue={path.slice(path.lastIndexOf('/') + 1)}
-                setInput={setPath}
+                inputLabel={'Название англ'}
+                inputValue={engTitle}
+                setInput={setEngTitle}
               />
             </div>
           </div>
@@ -168,14 +108,11 @@ const EditSectionOrCollection = () => {
             </CustomButton>
           </div>
           <div className='admin_status_container'>
-            {status && percentage ? (
+            {status && (
               <div className='upload_status'>
                 <p className='status'>{status}</p>
-                {percentage !== '100' ? (
-                  <p className='percentage'>{percentage}%</p>
-                ) : null}
               </div>
-            ) : null}
+            )}
           </div>
         </React.Fragment>
       ) : (
