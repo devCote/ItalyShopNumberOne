@@ -3,14 +3,14 @@ import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 import 'firebase/compat/storage';
 
-const config = {
-  apiKey: process.env.REACT_APP_APIKEY,
-  authDomain: 'eshop-number1.firebaseapp.com',
-  projectId: 'eshop-number1',
-  storageBucket: 'eshop-number1.appspot.com',
-  messagingSenderId: '93698448492',
-  appId: '1:93698448492:web:a668b7cc5973bba0090c49',
-  measurementId: 'G-39DG6L3LWP',
+const firebaseConfig = {
+  apiKey: "AIzaSyA5WLYWDdEL--PsXVsQKWjN_6Zd0FLL98Q",
+  authDomain: "italyshopnumberone.firebaseapp.com",
+  projectId: "italyshopnumberone",
+  storageBucket: "italyshopnumberone.appspot.com",
+  messagingSenderId: "882287463263",
+  appId: "1:882287463263:web:57687d11b24f495d9444ea",
+  measurementId: "G-1YN9EHFQS0"
 };
 
 export const deleteImage = (childRef: any, isListAll = false) => {
