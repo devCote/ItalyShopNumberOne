@@ -5,6 +5,7 @@
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.11.1",
     "axios": "^0.21.0",
+    "caniuse-lite": "^1.0.30001346",
     "firebase": "^9.0.2",
     "ol": "^6.5.0",
     "react": "^17.0.1",
