@@ -16,13 +16,11 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
     &:hover .sign_to_action {
-      opacity: 0.5;
-      color: colors.$primary;
+      opacity: 0.8;
     }
 
     &:hover .text_to_action {
-      opacity: 0.5;
-      color: colors.$primary;
+      opacity: 0.8;
     }
 
     .sign_to_action {
@@ -30,12 +28,10 @@
       margin-top: 30%;
       font-weight: 700;
       font-size: 6.5rem;
-      text-shadow: 2px 2px grey;
     }
 
     .text_to_action {
       color: white;
-      text-shadow: 2px 2px grey;
       font-weight: 700;
       font-size: 1.5rem;
     }

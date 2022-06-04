@@ -30,7 +30,7 @@ const AddSection = () => {
   };
 
   useEffect(() => {
-    if (status === 'Загрузка завершена успешно')
+    if (status === 'Success')
       setInterval(() => {
         history.push('/')
         window.location.reload()
@@ -50,7 +50,7 @@ const AddSection = () => {
     uploadRef.current.click();
   };
 
-  if (!admin) return <h1>Режим админа не включен</h1>;
+  if (!admin) return <h1>Admin mode is off</h1>;
 
   return (
     <React.Fragment>
@@ -72,12 +72,12 @@ const AddSection = () => {
         </div>
         <div className='admin_input_container'>
           <AdminInput
-            inputLabel={'Название раздела'}
+            inputLabel={'Section Title'}
             inputValue={title}
             setInput={setTitle}
           />
           <AdminInput
-            inputLabel={'Название англ'}
+            inputLabel={'Route Name'}
             inputValue={url}
             setInput={setUrl}
           />
@@ -90,14 +90,14 @@ const AddSection = () => {
           type='button'
           apply
         >
-          Отправить
+          Apply
         </CustomButton>
         <CustomButton
           onClick={() => history.push('/')}
           className='control_btn'
           type='button'
         >
-          Вернуться
+          Cansel
         </CustomButton>
       </div>
       <div className='admin_status_container'>

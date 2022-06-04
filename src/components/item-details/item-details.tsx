@@ -55,7 +55,7 @@ const ItemDetails = () => {
         {newPrice ? (
           <React.Fragment>
             <h1 className='details_product_old_price'>{price}</h1>
-            <h1 className='details_product_price'>{newPrice}грн</h1>
+            <h1 className='details_product_price'>{newPrice}$</h1>
           </React.Fragment>
         ) : (
           <h1 className='details_product_price'>{price}грн</h1>
@@ -103,55 +103,55 @@ const ItemDetails = () => {
           <table className='details_table'>
             {brand ? (
               <tr>
-                <th>Бренд</th>
+                <th>Brand</th>
                 <td>{brand}</td>
               </tr>
             ) : null}
             {country ? (
               <tr>
-                <th className='th2'>Страна</th>
+                <th className='th2'>Country</th>
                 <td className='td2'>{country}</td>
               </tr>
             ) : null}
             {landing ? (
               <tr>
-                <th>Посадка</th>
+                <th>Landing</th>
                 <td>{landing}</td>
               </tr>
             ) : null}
             {style ? (
               <tr>
-                <th className='th2'>Стиль</th>
+                <th className='th2'>Style</th>
                 <td className='td2'>{style}</td>
               </tr>
             ) : null}
             {color ? (
               <tr>
-                <th>Цвет</th>
+                <th>Color</th>
                 <td>{color}</td>
               </tr>
             ) : null}
             {fabricType ? (
               <tr>
-                <th className='th2'>Тип ткани</th>
+                <th className='th2'>Fabric</th>
                 <td className='td2'>{fabricType}</td>
               </tr>
             ) : null}
             {fabricSettings ? (
               <tr>
-                <th>Свойства ткани</th>
+                <th>Fabric Settings</th>
                 <td>{fabricSettings}</td>
               </tr>
             ) : null}
             {fastener ? (
               <tr>
-                <th className='th2'>Застежка</th>
+                <th className='th2'>Fastener</th>
                 <td className='td2'>{fastener}</td>
               </tr>
             ) : null}
             {sizes ? (
               <tr>
-                <th>Размеры</th>
+                <th>Sizes</th>
                 <td>{sizes}</td>
               </tr>
             ) : null}
@@ -167,14 +167,14 @@ const ItemDetails = () => {
             )
           }
         >
-          Вернуться
+          Back
         </CustomButton>
         <CustomButton
           className='details_add_btn'
           onClick={() => dispatch(addItem(item[0]))}
           overlay
         >
-          Добавить в корзину
+          Add to cart
         </CustomButton>
       </div>
     </div>

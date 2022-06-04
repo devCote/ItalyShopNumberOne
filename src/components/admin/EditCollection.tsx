@@ -196,7 +196,7 @@ const EditCollection = () => {
                   <React.Fragment>
                     <div className='image_discount_back' />
                     <div className='image_discount_num'>{discount}%</div>
-                    <div className='image_discount_word'>Скидка</div>
+                    <div className='image_discount_word'>Discount</div>
                   </React.Fragment>
                 ) : null}
                 <div className='collection-footer'>
@@ -205,10 +205,10 @@ const EditCollection = () => {
                     {newPrice && discountToggle ? (
                       <React.Fragment>
                         <span className='oldPrice'>{price}</span>
-                        <span className='price'>{newPrice}грн</span>
+                        <span className='price'>{newPrice}$</span>
                       </React.Fragment>
                     ) : (
-                      <span className='price'>{price}грн</span>
+                      <span className='price'>{price}$</span>
                     )}
                   </div>
                 </div>
@@ -300,63 +300,63 @@ const EditCollection = () => {
             </div>
             <div className='admin_input_container'>
               <AdminInput
-                inputLabel={'Название продукта'}
+                inputLabel={'Title'}
                 inputValue={name}
                 setInput={setName}
               />
               <AdminInput
-                inputLabel={'Цена'}
+                inputLabel={'Price'}
                 inputValue={price}
                 setInput={setPrice}
               />
               <AdminInput
-                inputLabel={'Бренд'}
+                inputLabel={'Brand'}
                 inputValue={brand}
                 setInput={setBrand}
               />
               <AdminInput
-                inputLabel={'Страна'}
+                inputLabel={'Country'}
                 inputValue={country}
                 setInput={setCountry}
               />
               <AdminInput
-                inputLabel={'Посадка'}
+                inputLabel={'Landing'}
                 inputValue={landing}
                 setInput={setLanding}
               />
               <AdminInput
-                inputLabel={'Стиль'}
+                inputLabel={'Style'}
                 inputValue={style}
                 setInput={setStyle}
               />
               <AdminInput
-                inputLabel={'Цвет'}
+                inputLabel={'Color'}
                 inputValue={color}
                 setInput={setColor}
               />
               <AdminInput
-                inputLabel={'Тип ткани'}
+                inputLabel={'Fabric Type'}
                 inputValue={fabricType}
                 setInput={setFabricType}
               />
               <AdminInput
-                inputLabel={'Свойства ткани'}
+                inputLabel={'Fabric Settings'}
                 inputValue={fabricSettings}
                 setInput={setFabricSettings}
               />
               <AdminInput
-                inputLabel={'Застежка'}
+                inputLabel={'Fastener'}
                 inputValue={fastener}
                 setInput={setFastener}
               />
               <AdminInput
-                inputLabel={'Размеры'}
+                inputLabel={'Sizes'}
                 inputValue={sizes}
                 setInput={setSizes}
               />
             </div>
             <div className='discount_container'>
-              <h1 className='discount_title'>Скидка</h1>
+              <h1 className='discount_title'>Discount</h1>
               <input
                 className='discount_check'
                 type='checkbox'
@@ -367,7 +367,7 @@ const EditCollection = () => {
               />
               <label style={{ marginBottom: '10px' }} htmlFor='discount'>
                 {' '}
-                АКТИВИРОВАТЬ
+                Activate
               </label>
               {discountToggle ? (
                 <AdminInput
@@ -385,7 +385,7 @@ const EditCollection = () => {
               type='button'
               apply
             >
-              Применить
+              Apply
             </CustomButton>
             <CustomButton
               onClick={() =>
@@ -396,7 +396,7 @@ const EditCollection = () => {
               className='control_btn'
               type='button'
             >
-              Вернуться
+              Cansel
             </CustomButton>
           </div>
           <div className='admin_status_container'>

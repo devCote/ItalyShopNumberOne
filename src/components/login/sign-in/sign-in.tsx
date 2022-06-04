@@ -36,29 +36,29 @@ const SignIn = () => {
 
   return (
     <div className='sign-in'>
-      <h2>Уже есть аккаунт?</h2>
-      <span>Войдите с помошью логина и пароля</span>
+      <h2>Have an acount?</h2>
+      <span>Login</span>
       <form onSubmit={handleSubmit}>
         <FormInput
           name='email'
           type='email'
           onChange={handleChange}
           value={email}
-          label='почта'
+          label='email'
           required
         />
         <FormInput
           name='password'
           type='password'
           value={password}
-          label='пароль'
+          label='password'
           onChange={handleChange}
           required
         />
         <div className='buttons'>
           <CustomButton className='l_btn' type='submit'>
             {' '}
-            Логин{' '}
+            login{' '}
           </CustomButton>
           <CustomButton
             className='l_btn'
@@ -67,7 +67,7 @@ const SignIn = () => {
             isGoogleSignIn
           >
             {' '}
-            Google Логин{' '}
+            Google{' '}
           </CustomButton>
         </div>
       </form>

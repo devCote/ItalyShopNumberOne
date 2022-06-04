@@ -61,35 +61,35 @@ const CheckoutPage = () => {
     <div className="checkout-page">
       <div className="checkout-header">
         <div className="header-block">
-          <span>Продукция</span>
+          <span>Product</span>
         </div>
         <div className="header-block">
-          <span>Описание</span>
+          <span>Info</span>
         </div>
         <div className="header-block">
-          <span>Количество</span>
+          <span>Quantity</span>
         </div>
         <div className="header-block">
-          <span>Цена</span>
+          <span>Price</span>
         </div>
         <div className="header-block">
-          <span>Размер</span>
+          <span>Size</span>
         </div>
         <div className="header-block">
-          <span>Цвет</span>
+          <span>Color</span>
         </div>
         <div className="header-block">
-          <span>Удалить</span>
+          <span>Delete</span>
         </div>
       </div>
       {cartItems.map((cartItem: any) => (
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
       <div className="total">
-        <span>Сумма к оплате: {total}грн</span>
+        <span>Total: {total}$</span>
       </div>
       <div className="test-warning">
-        *Данные для тестовой оплаты карты*
+        *For test card pay*
         <br />
         4242 4242 4242 4242 - Exp: 01/21 - CVV: 123
       </div>
@@ -97,13 +97,13 @@ const CheckoutPage = () => {
         <StripeCheckoutBtn price={total} />
       </div>
       <div className="payment">
-        <CustomButton onClick={stripeCheckout}>Оплата картой</CustomButton>
+        <CustomButton onClick={stripeCheckout}>Card Pay</CustomButton>
         <CustomButton
           className="pay_delivery_btn"
           inverted={inverted}
           onClick={deliveryPayment}
         >
-          Оплата при получении
+          Pay on delivery
         </CustomButton>
       </div>
       {inverted ? (
@@ -113,11 +113,11 @@ const CheckoutPage = () => {
         >
           <div className="pay_row">
             <label htmlFor="pay_name" className="pay_label">
-              Имя и Фамилия
+              Fistname Lastname
             </label>
             <input
               type="text"
-              placeholder="имя получателя"
+              placeholder="name"
               className="pay_input"
               value={name}
               onChange={(e) => {
@@ -129,7 +129,7 @@ const CheckoutPage = () => {
 
           <div className="pay_row">
             <label htmlFor="pay_tel" className="pay_label">
-              Мобильный Телефон
+              Phone number
             </label>
             <input
               type="telephone"
@@ -137,7 +137,7 @@ const CheckoutPage = () => {
               onChange={(e) => {
                 setTel(e.target.value);
               }}
-              placeholder="телефон получателя"
+              placeholder="phone"
               className="pay_input"
               required
             />
@@ -145,11 +145,11 @@ const CheckoutPage = () => {
 
           <div className="pay_row">
             <label htmlFor="pay_city" className="pay_label">
-              Город(нп.) получения
+              City
             </label>
             <input
               type="text"
-              placeholder="место получателя"
+              placeholder="city"
               value={place}
               onChange={(e) => {
                 setPlace(e.target.value);
@@ -161,11 +161,11 @@ const CheckoutPage = () => {
 
           <div className="pay_row">
             <label htmlFor="pay_partNP" className="pay_label">
-              Отделение Новой Почты
+              Address
             </label>
             <input
               type="text"
-              placeholder="номер отдела почты"
+              placeholder="address"
               value={department}
               onChange={(e) => {
                 setDepartment(e.target.value);
@@ -175,7 +175,7 @@ const CheckoutPage = () => {
             />
           </div>
           <CustomButton className="pay_btn" type="submit">
-            Отправить заказ
+            Submit
           </CustomButton>
         </form>
       ) : null}

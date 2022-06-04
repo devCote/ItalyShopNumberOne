@@ -35,7 +35,7 @@ const AddCollection = () => {
   const currentSection = useSelector(selectCurrentSection(sectionName))
 
   useEffect(() => {
-    if (status === 'Загрузка завершена успешно')
+    if (status === 'Success')
       setTimeout(() => {
         window.location.replace(
           `/shop/${sectionName}`
@@ -97,7 +97,7 @@ const AddCollection = () => {
     setCurrentId(count + 1);
   };
 
-  if (!admin) return <h1>Режим админа не включен</h1>;
+  if (!admin) return <h1>Admin mode is off</h1>;
 
   return (
     <React.Fragment>
@@ -200,57 +200,57 @@ const AddCollection = () => {
             </div>
             <div className='admin_input_container'>
               <AdminInput
-                inputLabel={'Название продукта'}
+                inputLabel={'Title'}
                 inputValue={name}
                 setInput={setName}
               />
               <AdminInput
-                inputLabel={'Цена'}
+                inputLabel={'Price'}
                 inputValue={price}
                 setInput={setPrice}
               />
               <AdminInput
-                inputLabel={'Бренд'}
+                inputLabel={'Brand'}
                 inputValue={brand}
                 setInput={setBrand}
               />
               <AdminInput
-                inputLabel={'Страна'}
+                inputLabel={'Country'}
                 inputValue={country}
                 setInput={setCountry}
               />
               <AdminInput
-                inputLabel={'Посадка'}
+                inputLabel={'Landing'}
                 inputValue={landing}
                 setInput={setLanding}
               />
               <AdminInput
-                inputLabel={'Стиль'}
+                inputLabel={'Style'}
                 inputValue={style}
                 setInput={setStyle}
               />
               <AdminInput
-                inputLabel={'Цвет'}
+                inputLabel={'Color'}
                 inputValue={color}
                 setInput={setColor}
               />
               <AdminInput
-                inputLabel={'Тип ткани'}
+                inputLabel={'Fabric Type'}
                 inputValue={fabricType}
                 setInput={setFabricType}
               />
               <AdminInput
-                inputLabel={'Свойства ткани'}
+                inputLabel={'Fabric Setings'}
                 inputValue={fabricSettings}
                 setInput={setFabricSettings}
               />
               <AdminInput
-                inputLabel={'Застежка'}
+                inputLabel={'Fastener'}
                 inputValue={fastener}
                 setInput={setFastener}
               />
               <AdminInput
-                inputLabel={'Размеры'}
+                inputLabel={'Sizes'}
                 inputValue={sizes}
                 setInput={setSizes}
               />
@@ -263,7 +263,7 @@ const AddCollection = () => {
               type='button'
               apply
             >
-              Применить
+              Apply
             </CustomButton>
             <CustomButton
               onClick={() =>
@@ -274,7 +274,7 @@ const AddCollection = () => {
               className='control_btn'
               type='button'
             >
-              Вернуться
+              Cancel
             </CustomButton>
           </div>
           <div className='admin_status_container'>

@@ -20,7 +20,7 @@ const Collection = () => {
 
   const Empty = () => (
     <div className="empty_cont">
-      <p className="empty">Пусто</p>
+      <p className="empty">Empty</p>
     </div>
   );
 

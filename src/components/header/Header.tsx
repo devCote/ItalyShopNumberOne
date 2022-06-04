@@ -39,7 +39,7 @@ const Header = () => {
             <React.Fragment>
               {currentUser.displayName === 'Dmitriy Bahanenko' ? (
                 <div className="header_option_slider">
-                  <span className="header_optionLineOne">Админ</span>
+                  <span className="header_optionLineOne">Admin</span>
                   <div className="header_optionLineTwo">
                     <label className="switch">
                       <input
@@ -56,11 +56,11 @@ const Header = () => {
           ) : null}
         </React.Fragment>
         <Link to="/" className="header_option standart">
-          <span className="header_optionLineOne">Коллекции</span>
-          <span className="header_optionLineTwo">Главная</span>
+          <span className="header_optionLineOne">Main</span>
+          <span className="header_optionLineTwo">Collections</span>
         </Link>
         <Link to="/login" className="header_option standart">
-          <span className="header_optionLineOne">Привет</span>
+          <span className="header_optionLineOne">Hello</span>
           {currentUser ? (
             <span
               className="header_optionLineTwo"
@@ -74,16 +74,16 @@ const Header = () => {
               {currentUser.displayName}
             </span>
           ) : (
-            <span className="header_optionLineTwo">Логин</span>
+            <span className="header_optionLineTwo">Login</span>
           )}
         </Link>
         <Link to="/checkout" className="header_option standart">
-          <span className="header_optionLineOne">Покупки</span>
-          <span className="header_optionLineTwo">Заказы</span>
+          <span className="header_optionLineOne">Buy</span>
+          <span className="header_optionLineTwo">Orders</span>
         </Link>
         <Link to="/contacts" className="header_option standart">
-          <span className="header_optionLineOne">О нас</span>
-          <span className="header_optionLineTwo">Контакты</span>
+          <span className="header_optionLineOne">About</span>
+          <span className="header_optionLineTwo">Contacts</span>
         </Link>
         <div
           onMouseEnter={() => setColor('#84BCDA')}

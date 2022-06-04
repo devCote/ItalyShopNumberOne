@@ -24,7 +24,7 @@ const CollectionItem = ({ item, collectionId, collectionName }: any) => {
         <React.Fragment>
           <div className="image_discount_back" />
           <div className="image_discount_num">{discount}%</div>
-          <div className="image_discount_word">Скидка</div>
+          <div className="image_discount_word">discount</div>
         </React.Fragment>
       ) : null}
       <div className="collection-footer">
@@ -33,10 +33,10 @@ const CollectionItem = ({ item, collectionId, collectionName }: any) => {
           {newPrice ? (
             <React.Fragment>
               <span className="oldPrice">{price}</span>
-              <span className="price">{newPrice}грн</span>
+              <span className="price">{newPrice}$</span>
             </React.Fragment>
           ) : (
-            <span className="price">{price}грн</span>
+            <span className="price">{price}$</span>
           )}
         </div>
       </div>
@@ -47,7 +47,7 @@ const CollectionItem = ({ item, collectionId, collectionName }: any) => {
         />
       ) : (
         <CustomButton onClick={() => dispatch(addItem(item))} inverted>
-          В корзину
+          add to cart
         </CustomButton>
       )}
     </div>

@@ -35,15 +35,15 @@ const SignUp = () => {
 
   return (
     <div className="sign-up">
-      <h2 className="title">У меня нет аккаунта</h2>
-      <span>Укажите данные для регистрации</span>
+      <h2 className="title">Create new account</h2>
+      <span>Enter your credentials</span>
       <form className="sign-up-form" onSubmit={handleSubmit}>
         <FormInput
           type="text"
           name="displayName"
           value={displayName}
           onChange={handleChange}
-          label="Имя"
+          label="Name"
           required
         ></FormInput>
         <FormInput
@@ -51,7 +51,7 @@ const SignUp = () => {
           name="email"
           value={email}
           onChange={handleChange}
-          label="Почта"
+          label="email"
           required
         ></FormInput>
         <FormInput
@@ -59,7 +59,7 @@ const SignUp = () => {
           name="password"
           value={password}
           onChange={handleChange}
-          label="Пароль"
+          label="password"
           required
         ></FormInput>
         <FormInput
@@ -67,10 +67,10 @@ const SignUp = () => {
           name="confirmPassword"
           value={confirmPassword}
           onChange={handleChange}
-          label="Подтвердите пароль"
+          label="confirm password"
           required
         ></FormInput>
-        <CustomButton type="submit">Зарегестрироваться</CustomButton>
+        <CustomButton type="submit">Submit</CustomButton>
       </form>
     </div>
   );

@@ -59,15 +59,11 @@
       }
 
       &:hover .sign_to_action {
-        opacity: 0.8;
-        color: colors.$primary;
-        text-shadow: none;
+        color: lighten(colors.$primary,10%);
       }
 
       &:hover .text_to_action {
-        opacity: 0.8;
-        color: colors.$primary;
-        text-shadow: none;
+        color: lighten(colors.$primary,10%);
       }
 
       .sign_to_action {
@@ -75,16 +71,16 @@
         margin-top: 30%;
         font-weight: 700;
         font-size: 6.0rem;
-        text-shadow: 2px 2px grey;
         text-align: center;
+        color: colors.$primary;
       }
 
       .text_to_action {
         color: white;
-        text-shadow: 2px 2px grey;
         font-weight: 500;
         font-size: 1.5rem;
         text-align: center;
+        color: colors.$primary;
       }
 
       .modify_btn_container {

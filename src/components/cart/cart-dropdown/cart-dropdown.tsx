@@ -34,7 +34,7 @@ const CartDropdown = () => {
         {cartItems.length ? (
           cartItems.map((e: any) => <CartItem key={e.id} item={e} />)
         ) : (
-          <span className="empty-message">корзина пуста</span>
+          <span className="empty-message">cart is empty</span>
         )}
       </div>
       <CustomButton
@@ -43,7 +43,7 @@ const CartDropdown = () => {
           dispatch(toggleCartHidden());
         }}
       >
-        мои заказы
+        orders
       </CustomButton>
     </div>
   );

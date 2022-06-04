@@ -26,9 +26,9 @@ const CheckoutItem = ({ cartItem }: any) => {
         </div>
       </span>
       {newPrice ? (
-        <span className='price'>{newPrice * quantity}грн</span>
+        <span className='price'>{newPrice * quantity}$</span>
       ) : (
-        <span className='price'>{price * quantity}грн</span>
+        <span className='price'>{price * quantity}$</span>
       )}
       <span className='color'>{color}</span>
       <span className='size'>{sizes}</span>

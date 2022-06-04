@@ -8,7 +8,7 @@ const CollectionAdmin = ({ history, sectionName }: { history: { push: Function }
     }}
   >
     <p className="sign_to_action">+</p>
-    <p className="text_to_action">Добавить позицию</p>
+    <p className="text_to_action">Add new item</p>
   </div>
 );
 

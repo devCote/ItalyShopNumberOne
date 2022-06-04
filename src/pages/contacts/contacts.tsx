@@ -58,19 +58,18 @@ const ContactPage = () => {
 
   return (
     <div className="ctc_main_cont">
-      <h2 className="ctc_title">ул.Антоновича 115 магазин 1ВП и 66В</h2>
+      <h2 className="ctc_title">Antonovicha str</h2>
       <div
         ref={mapRef}
         className="ctc_map"
         style={{ width: '80vw', height: '60vh' }}
       />
       <div className="ctc_adress">
-        Адрес: Украина Кие ул. Антоновича 115. Метро "Палац Украина".
-        ВЛАДИМИРСКИЙ РЫНОК . Магазин № 1ВП (пассаж) и № 66В - 4 ряд
+        Antonovicha str 115, Palats Ukraina
       </div>
       <div className="ctc_tel">
-        Тел: +380503587856 Сергей <br /> Тел: +380503534950 Таня <br />{' '}
-        <span className="ctc_mail"> Email: bakhanenko@gmail.com</span>
+        Tel: +38087856 Sergey <br /> Тел: +38034950 Tatiana <br />{' '}
+        <span className="ctc_mail"> Email: defcote@gmail.com</span>
       </div>
     </div>
   );

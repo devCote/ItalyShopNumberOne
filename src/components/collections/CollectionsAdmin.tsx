@@ -6,7 +6,7 @@ const CollectionsAdmin = ({ history }: any) => (
     }}
   >
     <p className="sign_to_action">+</p>
-    <p className="text_to_action">Добавить раздел</p>
+    <p className="text_to_action">Add new section</p>
   </div>
 )
 

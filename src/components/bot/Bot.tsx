@@ -32,7 +32,7 @@ const Bot = () => {
 
   const handleSubmit = () => {
     if (!name) {
-      alert('Вы не ввели имя');
+      alert('No name');
       return;
     }
     if (tel || text) {
@@ -41,29 +41,23 @@ const Bot = () => {
         method: 'POST',
         data: { name, tel, text },
       })
-        .then((_res) => alert('Сообщение отправлено'))
+        .then((_res) => alert('message sent'))
         .catch((err) => console.log(err.message));
       setName('');
       setTel('');
       setText('');
       handleBotHide();
     } else {
-      alert('Введите телефон либо сообщение');
+      alert('enter message or phone number');
     }
   };
 
   return (
     <div ref={botIconRef} onClick={handleBotShow} className={animeClass}>
-      {/* <img
-        src={PhoneIcon}
-        alt='PhoneIcon'
-        style={display === 'none' ? { display: 'flex' } : { display: 'none' }}
-        className='bot_phone_icon'
-      /> */}
       <ChatIcon className="bot_phone_icon" />
       <div className="bot_message_container" style={{ display }}>
         <div className="bot_message_header">
-          <h2 className="bot_title">Услуга перезвонить или оставить отзыв</h2>
+          <h2 className="bot_title">Request a callback or message us</h2>
         </div>
         <div className="bot_message_body">
           <form className="bot_form">
@@ -71,7 +65,7 @@ const Bot = () => {
               className="bot_input"
               onChange={(e) => setName(e.target.value)}
               type="text"
-              placeholder="Имя"
+              placeholder="Name"
               value={name}
               required
             />
@@ -79,22 +73,22 @@ const Bot = () => {
               className="bot_input"
               onChange={(e) => setTel(e.target.value)}
               type="text"
-              placeholder="Телефон"
+              placeholder="Tel"
               value={tel}
             />
             <textarea
               className="bot_textarea"
-              placeholder="Сообщение"
+              placeholder="Message"
               onChange={(e) => setText(e.target.value)}
               value={text}
             />
           </form>
           <div className="bot_btns">
             <CustomButton className="bot_btn" onClick={handleBotHide}>
-              Закрыть
+              Close
             </CustomButton>
             <CustomButton className="bot_btn" onClick={handleSubmit}>
-              Отправить
+              Send
             </CustomButton>
           </div>
         </div>

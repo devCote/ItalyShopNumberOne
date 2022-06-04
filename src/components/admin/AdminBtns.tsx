@@ -30,7 +30,7 @@ const AdminBtns = ({ item, editLink, fireColl, isCollection }: Props) => {
   const [status, setStatus] = useState()
 
   useEffect(() => {
-    if (status === 'done')
+    if (status === 'success')
       setInterval(() => {
         window.location.reload();
       }, 1000);
@@ -60,10 +60,10 @@ const AdminBtns = ({ item, editLink, fireColl, isCollection }: Props) => {
       return (
         <Modal
           title={item.title}
-          body="Вы уверенны, что хотите удалить коллекцию? Удалив коллекцию, Вы удалите все позиции внутри этой коллекции."
-          submit="Удалить"
+          body="Are you sure you want to delete this Section? When you delete a section, you delete all items within that section."
+          submit="Delete"
           negative
-          cancel="Отмена"
+          cancel="Cancel"
           onDismiss={() => setToggleModal(!toggleModal)}
           onSubmit={onSubmit}
         />
@@ -72,10 +72,10 @@ const AdminBtns = ({ item, editLink, fireColl, isCollection }: Props) => {
       return (
         <Modal
           title={item.title}
-          body="Вы уверенны, что хотите удалить позицию?"
-          submit="Удалить"
+          body="Are you sure you want to delete the product?"
+          submit="Delete"
           negative
-          cancel="Отмена"
+          cancel="Cancel"
           onDismiss={() => setToggleModal(!toggleModal)}
           onSubmit={onSubmit}
         />
@@ -91,14 +91,14 @@ const AdminBtns = ({ item, editLink, fireColl, isCollection }: Props) => {
             className="modify_btn"
             type="button"
           >
-            Изменить
+            Change
           </CustomButton>
           <CustomButton
             onClick={() => setToggleModal(!toggleModal)}
             className="modify_btn"
             type="button"
           >
-            Удалить
+            Delete
           </CustomButton>
           {toggleModal ? renderModal() : null}
         </div>

@@ -22,12 +22,12 @@ const StripeCheckoutBtn = ({ price }: any) => {
       },
     })
       .then((_response) => {
-        alert('Оплата произведена успешно!');
+        alert('Success!');
         dispatch(paymentSuccess());
       })
       .catch((err) => {
         alert(
-          'Ошибка при оплате. Пожалуйста убедитесь, что Вы ввели коректные данные карты.'
+          'Something went wrong. Check your credentials and try again.'
         );
         console.log('payment error', err.message);
       });
@@ -40,9 +40,9 @@ const StripeCheckoutBtn = ({ price }: any) => {
       billingAddress
       shippingAddress
       image={Image}
-      description={`Сумма Вашего заказа: ₴${price}`}
+      description={`Your order total: $${price}`}
       amount={priceForStripe}
-      panelLabel='Оплата картой'
+      panelLabel='Card Pay'
       token={onToken}
       stripeKey={publishableKey}
       locale='auto'
