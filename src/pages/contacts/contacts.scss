@@ -1,3 +1,4 @@
+@use '../../lib/colors' as *;
 .ctc_main_cont {
   display: flex;
   flex-direction: column;
@@ -8,7 +9,7 @@
 
   .ctc_title {
     margin-bottom: 10px;
-    color: #743ad5;
+    color: $secondary;
     text-transform: uppercase;
     background-color: rgba($color: #000000, $alpha: 0.8);
     padding: 10px;
@@ -28,7 +29,7 @@
     font-size: 1.5rem;
     margin: 10px;
     padding: 10px;
-    border-left: 6px solid #743ad5;
+    border-left: 6px solid $secondary;
     background-color: rgba($color: #000000, $alpha: 0.8);
     .ctc_mail {
       font-weight: 300;

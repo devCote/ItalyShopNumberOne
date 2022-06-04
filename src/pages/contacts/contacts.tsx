@@ -58,7 +58,7 @@ const ContactPage = () => {
 
   return (
     <div className="ctc_main_cont">
-      <h2 className="ctc_title">Antonovicha str</h2>
+      <h2 className="ctc_title">Antonovicha str 115</h2>
       <div
         ref={mapRef}
         className="ctc_map"
@@ -68,7 +68,7 @@ const ContactPage = () => {
         Antonovicha str 115, Palats Ukraina
       </div>
       <div className="ctc_tel">
-        Tel: +38087856 Sergey <br /> Тел: +38034950 Tatiana <br />{' '}
+        Tel: +38087856 Sergey <br /> Tel: +38034950 Tatiana <br />{' '}
         <span className="ctc_mail"> Email: defcote@gmail.com</span>
       </div>
     </div>

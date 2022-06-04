@@ -14,29 +14,29 @@ const Modal = ({ title, body, submit, cancel, onDismiss, onSubmit }: any) => {
 
   return portal
     ? ReactDOM.createPortal(
-        <div onClick={onDismiss} className='modal_dimmer'>
-          <div className='modal_window_container'>
-            <div onClick={(e) => e.stopPropagation()} className='modal_window'>
-              <div className='modal_header'>{title}</div>
-              <div className='modal_content'>{body}</div>
-              <div className='modal_actions'>
-                <CustomButton
-                  onClick={onSubmit}
-                  className='modal_delete_button'
-                >
-                  {' '}
-                  {submit}{' '}
-                </CustomButton>
-                <CustomButton onClick={onDismiss} className='button'>
-                  {' '}
-                  {cancel}{' '}
-                </CustomButton>
-              </div>
+      <div onClick={onDismiss} className='modal_dimmer'>
+        <div className='modal_window_container'>
+          <div onClick={(e) => e.stopPropagation()} className='modal_window'>
+            <div className='modal_header'>{title}</div>
+            <div className='modal_content'>{body}</div>
+            <div className='modal_actions'>
+              <CustomButton
+                onClick={onSubmit}
+                className='modal_delete_button'
+              >
+                {' '}
+                {submit}{' '}
+              </CustomButton>
+              <CustomButton onClick={onDismiss} className='button'>
+                {' '}
+                {cancel}{' '}
+              </CustomButton>
             </div>
           </div>
-        </div>,
-        portal
-      )
+        </div>
+      </div>,
+      portal
+    )
     : null;
 };
 
